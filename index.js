@@ -5,6 +5,11 @@
  */
 
 const express = require('express');
+const handlebars = require('express-handlebars');
+const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const db = require('./db');
 
 /**
  * ===================================
@@ -16,8 +21,13 @@ const express = require('express');
 const app = express();
 
 // Set up middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.use(cookieParser());
 
 // Set handlebars to be the default view engine
+app.engine('handlebars', handlebars({ defaultLayout: "main" }));
+app.set('view engine', 'handlebars');
 
 /**
  * ===================================
@@ -26,10 +36,7 @@ const app = express();
  */
 
 // Import routes to match incoming requests
-
-// Root GET request (it doesn't belong in any controller file)
-
-// Catch all unmatched requests and return 404 not found page
+require('./routes')(app, db);
 
 /**
  * ===================================
