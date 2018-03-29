@@ -19,44 +19,49 @@ In this exercise, we will build a full stack Pokedex web app with user authentic
 
 1.  Fork and clone this repository to your computer
 2.  Run `yarn install` to install dependencies
-3.  Create a new Postgres database by running `createdb pokemons -U <your_username>`
-4.  Run `psql -U <your_username> -d pokemons -a -f tables.sql` - this will create 2 new tables for you - a `pokemons` table and `users` table in the database
-5.  Seed data into the newly created `pokemons` table by running `psql -U <your_username> -d pokemons -a -f seed.sql` (Note: this will run 3 INSERT queries to seed 3 pokemons into the table.)
+3.  Create a new Postgres database by running `createdb pokemons_development -U <your_username>`
+4.  Run `psql -U <your_username> -d pokemons_development -a -f tables.sql` - this will create 2 new tables for you - a `pokemons` table and `users` table in the database
+5.  Seed pokedex data into the newly created `pokemons` table by running `psql -U <your_username> -d pokemons -a -f seed.sql`
 6.  Look in the starter file called `index.js`, run `nodemon` to start local server on port 3000
-7.  Open `localhost:3000` on your browser and see the home page
+7.  Write back-end code!
 
 ## Deliverables
 
-* Add in missing logic implementation in `controllers/pokemon.js` for `updateForm` and `update`
-* Add in missing logic implementation in `controllers/user.js` for `login`
-* Add a "Logout" button on home page that sends POST request to `/users/logout` to log out a user (hint: remember to remove cookies)
-* Ensure that you can create a new user account
-* Ensure that you can create a new pokemon
+Since we will be building this app from scratch, the only dependency added into `package.json` is Express. You should add dependencies (using `yarn add <package_name>`) as you go along building the app.
+
+* Build a CRUD app for Pokemons that follows the [REST][1] architectural style.
+
+* Build a CRUD app for Users that follows [REST][1] architectural style.
+
+* Build authentication functionality so a User can login and logout.
+
+* Build functionality for a User to own any number of Pokemons (one unique Pokemon per User). Hint: this requires a third table, which is a join table.
+
+__REST architecture reference__
+
+**URL**            | **HTTP Verb** | **Action**
+----------------   | ------------- | ----------
+/pokemons/         | GET           | index     
+/pokemons/new      | GET           | new       
+/pokemons          | POST          | create    
+/pokemons/:id      | GET           | show      
+/pokemons/:id/edit | GET           | edit      
+/pokemons/:id      | PATCH/PUT     | update    
+/pokemons/:id      | DELETE        | destroy   
 
 ## Further
 
-Add the ability for users to own newly created pokemons.
+* Personalise the home page of your app to display information about the logged-in User (eg. name and Pokemons she owns).
 
-* Drop the database from earlier and implement a slightly different entity relationship - modify `tables.sql` to create a third table called `user_pokemons` that has a primary key `id`, and 2 foreign keys `pokemon_id` and `user_id`
-* Modify the `pokemon/new.handlebars` file to accept a new field called "user_id"
-* Modify the backend logic to assign any newly created pokemon to the specified user based on the value of the new `user_id` field
-* Update the `user/user.handlebars` file to show all pokemons that a specified user owns (eg. `/users/1` should show the 1st user's account information _and_ names of pokemons that she owns)
+* Create a "super user" User account, and allow only User accounts with "super user" access to create new and modify existing Pokemons.
 
-## Notes
+## Tips
 
-* Singular vs plural naming is important. For this exercise, let's assume that the plural of pokemon is pokemons...
-* We have changed our table names to be plural. So user is now users table, and pokemon is now pokemons table.
+* Review the [explanation video](https://www.youtube.com/watch?v=yCX7YRFh0qM) to understand the overall flow of a Node + Express + Postgres app.
 
+* Refer to the previous `pokedex-express` exercises as needed. It is perfectly ok to revisit your own code. Developers do it all the time at work!
 
+* __Commit often__! We operate frequently in an erroneous state as developers, so whenever you feel like you have achieved a small milestone, you should make a git commit. It's not uncommon for a developer to need to revert to an older commit because the code written since that last commit just doesn't work, and you want to start afresh from the last saved commit.
 
 
-
-LINK TO AKIRA EXPLANATION VIDEO
-
-
-
-tables.sql --> 2 tables only, they create the 3rd join table
-
-seed.sql --> the entire pokdex, no users
-
-package.json --> only the bare bones (express)
+[1]: https://en.wikipedia.org/wiki/Representational_state_transfer
