@@ -27,15 +27,20 @@ In this exercise, we will build a full stack Pokedex web app with user authentic
 
 ## Deliverables
 
-Since we will be building this app from scratch, the only dependency added into `package.json` is Express. You should add dependencies (using `yarn add <package_name>`) as you go along building the app.
+Use the structure we have already seen in the previous MVC exercise, write the logic for implementing the app in small steps.
 
-* Build a CRUD app for Pokemons that follows the [REST][1] architectural style.
+* Start with creating a new User. Don’t worry about hashing password until you know that the app works
+* GET `/users/new` in `routes.js`
+* Specify the name of the controller method to be called inside `routes.js` (`user.newForm()`)
+* Write the `newForm()` method in the controller file (`controller/user.js`)
+* Run it, make sure it works
+* Write the handlebars file that will be rendered along with the response
+* Specify the name of the model method to be called inside `controller/user.js` (`allModels.userModel.new()`) — the method should take 2 parameters (1st is the request data, 2nd is the callback to be executed when the query has returned the result)
+* Write the `new()` method in the model file (`model/user.js`) — when the query result has returned succesfully, invoke the callback function and pass the result of the query into it
 
-* Build a CRUD app for Users that follows [REST][1] architectural style.
+* Repeat the above for all CRUD routes
+* Do the same for Pokemons
 
-* Build authentication functionality so a User can login and logout.
-
-* Build functionality for a User to own any number of Pokemons (one unique Pokemon per User). Hint: this requires a third table, which is a join table.
 
 __REST architecture reference__
 
@@ -62,6 +67,8 @@ __REST architecture reference__
 * Review the [explanation video](https://www.youtube.com/watch?v=yCX7YRFh0qM) to understand the overall flow of a Node + Express + Postgres app.
 
 * Refer to the previous `pokedex-express` exercises as needed. It is perfectly ok to revisit your own code. Developers do it all the time at work!
+
+* Since we will be building this app from scratch, the only dependency added into `package.json` is Express. You should add dependencies (using `yarn add <package_name>`) as you go along building the app.
 
 * __Commit often__! We operate frequently in an erroneous state as developers, so whenever you feel like you have achieved a small milestone, you should make a git commit. It's not uncommon for a developer to need to revert to an older commit because the code written since that last commit just doesn't work, and you want to start afresh from the last saved commit.
 
