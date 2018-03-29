@@ -55,6 +55,8 @@ __REST architecture reference__
 
 * Create a "super user" User account, and allow only User accounts with "super user" access to create new and modify existing Pokemons.
 
+* Use Postgres to make `email` a unique field for Users table, and prevent users from creating a new user account that uses an email that already exists in your database.
+
 ## Tips
 
 * Review the [explanation video](https://www.youtube.com/watch?v=yCX7YRFh0qM) to understand the overall flow of a Node + Express + Postgres app.
