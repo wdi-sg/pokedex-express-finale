@@ -21,11 +21,17 @@ const createForm = (req, res) => {
 
 const create = (db) => {
   return (req, res) => {
-    db.users.create(req.body, (queryRes) => {
-      // inject cookie
-      res.cookie("id", queryRes.rows[0].id);
-      res.cookie("name", req.body.name);
-      res.redirect("/");
+    db.users.create(req.body, (err, queryRes) => {
+      if (err) {
+        console.log(err.detail);
+        res.send("unable to create user");
+      } else {
+        // inject cookie
+        res.cookie("id", queryRes.rows[0].id);
+        res.cookie("name", req.body.name);
+        res.redirect("/");
+      }
+
     });
   }
 }

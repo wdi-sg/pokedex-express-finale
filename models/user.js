@@ -25,7 +25,7 @@ module.exports = (db) => {
         if (err) console.error('hash error', err);
         db.query(`insert into users (name, email, password) values ('${user.name}', '${user.email}', '${hash}') returning id`, (err, res) => {
           if (err) console.error("unable to create user in db", err.stack);
-          callback(res);
+          callback(err, res);
         })
       });
     },
