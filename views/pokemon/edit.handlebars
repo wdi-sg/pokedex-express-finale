@@ -1,0 +1,27 @@
+<form class="" action="/pokemons/{{pokemon.id}}?_method=PUT" method="post">
+  <div class="">
+    <input type="hidden" name="id" value="{{pokemon.id}}">
+  </div>
+  <div class="">
+    NUM <input type="text" name="num" value="{{pokemon.num}}">
+  </div>
+  <div class="">
+    NAME <input type="text" name="name" value="{{pokemon.name}}">
+  </div>
+  <div class="">
+    IMAGE <input type="text" name="img" value="{{pokemon.img}}">
+  </div>
+  <div class="">
+    WEIGHT <input type="text" name="weight" value="{{pokemon.weight}}">
+  </div>
+  <div class="">
+    HEIGHT <input type="text" name="height" value="{{pokemon.height}}">
+  </div>
+  <div class="">
+    <input type="submit" name="" value="EDIT">
+  </div>
+</form>
+<form class="" action="/pokemons/{{pokemon.id}}?_method=DELETE" method="post">
+  <input type="hidden" name="id" value="{{pokemon.id}}">
+  <input type="submit" name="" value="DELETE">
+</form>
