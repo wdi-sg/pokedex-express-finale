@@ -14,3 +14,12 @@
  * Export model functions as a module
  * ===========================================
  */
+module.exports = (pool) => {
+  return {
+    new: (userDetails) => {
+      pool.query(queryString, values, (err, res) => {
+        
+      });
+    }
+  };
+};

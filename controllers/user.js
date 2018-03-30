@@ -13,18 +13,19 @@
  * Controller logic
  * ===========================================
  */
+const db = require('../db.js');
+
+
+
 module.exports = {
   newForm: (req, res) => {
-    let context = {
-
-
-    };
-    res.render('user/new', context);
+    res.render('user/new');
     console.log("INSIDE USERS CONTROLLER");
   },
   create: (req, res) => {
     let userDetails = req.body;
-    res.send(userDetails);
+    db.users.new(userDetails);
+    
   }
 };
 /**
