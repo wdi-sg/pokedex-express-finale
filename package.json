@@ -5,6 +5,7 @@
   "repository": "https://github.com/seliyan89/pokedex-express-finale.git",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",

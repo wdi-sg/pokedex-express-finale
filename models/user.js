@@ -10,14 +10,15 @@
  * Export all functions as a module using `module.exports`,
  * to be imported (using `require(...)`) in `db.js`.
  */
-// var bcyrpt = require('bcyrpt');
+
+const bcrypt = require('bcrypt');
 
 module.exports = function(dbPool){
 
  	return{
  		newUserEntry : function(userInput,callback){
- 			// bcrypt.hash(userInput.password,2,(err,hash)=>{
- 				// userInput.password=hash;
+ 			bcrypt.hash(userInput.password,2,(err,hash)=>{
+ 				userInput.password=hash;
  				queryText= 'insert into users (username,email,password) values($1,$2,$3)';
  				values=[];
  				let keys=Object.keys(userInput);
@@ -27,7 +28,7 @@ module.exports = function(dbPool){
  				dbPool.query(queryText,values,(err,dbRes)=>{
  					callback(err,dbRes);
  				});
- 			// });
+ 			});
  		}
  	}
 };
