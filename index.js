@@ -5,6 +5,8 @@
  */
 
 const express = require('express');
+const exphbs  = require('express-handlebars');
+const bodyParser = require('body-parser');
 
 /**
  * ===================================
@@ -16,8 +18,16 @@ const express = require('express');
 const app = express();
 
 // Set up middleware
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 // Set handlebars to be the default view engine
+app.set('view engine', 'handlebars');
 
 /**
  * ===================================
@@ -26,7 +36,7 @@ const app = express();
  */
 
 // Import routes to match incoming requests
-
+require('./routes')(app);
 // Root GET request (it doesn't belong in any controller file)
 
 // Catch all unmatched requests and return 404 not found page

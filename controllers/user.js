@@ -13,7 +13,20 @@
  * Controller logic
  * ===========================================
  */
+module.exports = {
+  newForm: (req, res) => {
+    let context = {
 
+
+    };
+    res.render('user/new', context);
+    console.log("INSIDE USERS CONTROLLER");
+  },
+  create: (req, res) => {
+    let userDetails = req.body;
+    res.send(userDetails);
+  }
+};
 /**
  * ===========================================
  * Export controller functions as a module
