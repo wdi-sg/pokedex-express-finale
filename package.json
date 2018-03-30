@@ -1,9 +1,13 @@
 {
-  "name": "express-test",
+  "name": "pokedex-express-finale",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/seliyan89/pokedex-express-finale.git",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "pg": "^7.4.1"
   }
 }

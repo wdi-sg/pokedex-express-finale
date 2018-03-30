@@ -14,8 +14,35 @@
  * ===========================================
  */
 
+module.exports=function(db){
+
+	return {
+
+		getNewUserForm: function (sReq,sRes) {
+			sRes.render('user/new');
+		},
+
+		submitNewUserForm: function(sReq,sRes){
+			db.userModel.newUserEntry(sReq.body,(err,dbRes)=>{
+				sRes.send('Submitted');
+			})
+		}
+
+	};
+
+};
+
+
+
 /**
  * ===========================================
  * Export controller functions as a module
  * ===========================================
  */
+
+// module.exports = function(db){
+// 	return{
+// 		getNewUserForm:getNewUserForm,
+// 		submitNewUserForm:submitNewUserForm
+// 	}
+// };
