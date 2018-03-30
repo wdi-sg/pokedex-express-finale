@@ -7,3 +7,10 @@
  * Export as a function using `module.exports`,
  * to be imported (using `require(...)`) in `index.js`.
  */
+const users = require('./controllers/user')
+
+module.exports = (app, db) => {
+  // Users CRUD
+  app.get('/users/new', users.newForm);
+  app.post('/users/new', users.create(db));
+}
