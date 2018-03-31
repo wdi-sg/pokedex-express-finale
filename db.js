@@ -10,6 +10,7 @@
 
 const pg = require('pg');
 const userModel = require('./models/user');
+const pokemonModel = require('./models/pokemon');
 
 const dbPool = new pg.Pool({
 	host:'localhost',
@@ -21,5 +22,7 @@ const dbPool = new pg.Pool({
 
 module.exports = {
 	dbPool:dbPool,
-	userModel: userModel(dbPool)
+	userModel: userModel(dbPool),
+	pokemonModel:pokemonModel(dbPool)
+
 }

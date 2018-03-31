@@ -14,3 +14,15 @@
  * Export model functions as a module
  * ===========================================
  */
+
+ module.exports = function(dbPool){
+ 	return{
+ 		newPokemon: (userInput,callback)=>{
+ 			let queryText="insert into pokemons (num,name,img,weight,height) values($1,$2,$3,$4,$5)";
+ 			let values=[userInput.num,userInput.name,userInput.img,userInput.weight,userInput.height];
+ 			dbPool.query(queryText,values,(err,dbRes)=>{
+ 				callback(err,dbRes);
+ 			})
+ 		}
+ 	}
+ }

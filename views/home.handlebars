@@ -1,49 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Pokedex</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/css/home.css">
-</head>
-<body>
-	<div class="container-fluid mt-3 mb-5">
-		<div class="row mb-3">
-			<div class="col-12">
-				<h2>Hi, welcome to pokedex</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-md-9">
-				<form method="POST" action="/users/login">
-					Username: <input type="text" name="username">
-					Password: <input type="text" name="password">
-					<input type="submit" value="Sign-in">
-				</form>
-				{{#if noSuchUser}}
-				<p>No such User, please sign-up</p>
-				{{/if}}
-				{{#if incorrectPw}}
-				<p>Incorrect PW!</p>
-				{{/if}}
-			</div>
-			<div class="col-12 col-md-3">
-				<form method="GET" action="/users/new">
-					<input type="submit" value="Sign-up">
-				</form>
-			</div>
+<div class="container-fluid mt-3 mb-5">
+	<div class="row mb-3">
+		<div class="col-12">
+			<h2>Hi, welcome to pokedex</h2>
 		</div>
 	</div>
-	
-	<div class="container">
-		<div class="row">
-			{{#each pokemon}}
-			<div class="border d-flex flex-column align-items-center pokemon_container">
-				<p class="p-2 pokemon_name">{{this.name}}</p>
-				<img class="p-2 pokemon_img" src="{{this.img}}">
-			</div>
-			{{/each}}	
+	<div class="row">
+		<div class="col-12 col-md-9">
+			<form method="POST" action="/users/login">
+				Username: <input type="text" name="username">
+				Password: <input type="text" name="password">
+				<input type="submit" value="Sign-in">
+			</form>
+			{{#if noSuchUser}}
+			<p>No such User, please sign-up</p>
+			{{/if}}
+			{{#if incorrectPw}}
+			<p>Incorrect PW!</p>
+			{{/if}}
+		</div>
+		<div class="col-12 col-md-3">
+			<form method="GET" action="/users/new">
+				<input type="submit" value="Sign-up">
+			</form>
 		</div>
 	</div>
+</div>
 
-</body>
-</html>
+<div class="container">
+	<div class="row">
+		{{#each pokemon}}
+		<div class="border d-flex flex-column align-items-center pokemon_container">
+			<p class="p-2 pokemon_name">{{this.name}}</p>
+			<img class="p-2 pokemon_img" src="{{this.img}}">
+		</div>
+		{{/each}}	
+	</div>
+</div>
+

@@ -11,9 +11,9 @@
  * to be imported (using `require(...)`) in `db.js`.
  */
 
-const bcrypt = require('bcrypt');
+ const bcrypt = require('bcrypt');
 
-module.exports = function(dbPool){
+ module.exports = function(dbPool){
 
  	return{
  		newUserEntry : function(userInput,callback){
@@ -35,7 +35,6 @@ module.exports = function(dbPool){
 
  			let queryText='select * from users where username='+"'"+userInput.username+"'";
  			dbPool.query(queryText,(err,dbRes)=>{
- 				console.log(dbRes.rows);
  				if(err){
  					console.log("sql error",err.message);
  				}else if(dbRes.rows.length==0){
@@ -43,13 +42,20 @@ module.exports = function(dbPool){
  				}else {
  					hashedPw = dbRes.rows[0].password;
  					bcrypt.compare(userInput.password,hashedPw,(err,dbRes)=>{
- 						callback(err,dbRes);
+ 						if(dbRes==false){
+ 							callback(err,dbRes);
+ 						}else{
+ 							let queryText=('select * from pokemons')
+ 							dbPool.query(queryText,(err,dbRes)=>{
+ 								callback(err,dbRes);
+ 							});	
+ 						}
  					});	
  				}	
  			});
  		}
  	}
-};
+ };
 
 
 /**

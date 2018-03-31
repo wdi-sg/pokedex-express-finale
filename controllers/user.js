@@ -31,8 +31,6 @@ module.exports=function(db){
 			db.userModel.login(sReq.body,(err,dbRes)=>{
 				if(err){
 					console.log(err.message);
-				}else if(dbRes==true){
-					sRes.render('pokemon/new');
 				}else if (dbRes==false){
 					let context ={
 						incorrectPw:true
@@ -43,6 +41,11 @@ module.exports=function(db){
 						noSuchUser:true
 					};
 					sRes.render('home',context);
+				}else{
+					let context = {
+						pokemon: dbRes.rows
+					}
+					sRes.render('pokemon/new',context);
 				}
 			});
 		}

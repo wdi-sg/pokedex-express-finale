@@ -8,14 +8,16 @@
  * to be imported (using `require(...)`) in `routes.js`.
  */
 
-/**
- * ===========================================
- * Controller logic
- * ===========================================
- */
-
-/**
- * ===========================================
- * Export controller functions as a module
- * ===========================================
- */
+module.exports = function(db){
+	return{
+		newPokemon: (sReq,sRes)=>{
+			db.pokemonModel.newPokemon(sReq.body,(err,dbRes)=>{
+				if(err){
+					console.log("could not write data",err.message)
+				}else{
+					sRes.send('created');
+				}
+			});
+		}
+	}
+};
