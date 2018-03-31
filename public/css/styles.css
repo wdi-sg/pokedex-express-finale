@@ -47,6 +47,10 @@ button:hover {
   transform: scale(1.1);
 }
 
+.negative-button {
+  background-color: red;
+}
+
 .pokemon-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -61,11 +65,19 @@ button:hover {
   transform: scale(1.1);
 }
 
+.details-image-container {
+  border-radius: 5px;
+  background-color: #EEE;
+  width: 180px;
+  height: 220px;
+  display: inline-block;
+}
+
 .pokemon-image-container {
-    border-radius: 5px;
-    background-color: #EEE;
-    width: 180px;
-    height: 220px;
+  border-radius: 5px;
+  background-color: #EEE;
+  width: 180px;
+  height: 220px;
 }
 
 .pokemon-image {

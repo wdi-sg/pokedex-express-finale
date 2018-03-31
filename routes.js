@@ -25,4 +25,5 @@ module.exports = (app, db) => {
   app.get('/pokemons/new', pokemons.newForm);
   app.post('/pokemons/new', pokemons.create(db));
   app.get('/pokemons/:id', pokemons.details(db));
+  app.delete('/pokemons/:id', pokemons.remove(db));
 }

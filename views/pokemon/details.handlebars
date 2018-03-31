@@ -1,7 +1,13 @@
-<img src="{{img}}">
+<div class="details-image-container">
+  <img class="pokemon-image" src="{{img}}">
+</div>
+
 <h2>{{name}}</h2>
 <p>Weight: {{weight}}</p>
 <p>Height: {{height}}</p>
 <form method="GET" action="/pokemons/{{id}}/edit">
-  <button type="submit">Edit this Pokemon</button>
+  <button type="submit">Edit Pokemon</button>
+</form>
+<form method="POST" action="/pokemons/{{id}}?_method=DELETE">
+  <button class="negative-button" type="submit">Delete Pokemon</button>
 </form>

@@ -65,6 +65,18 @@ const update = (db) => {
     })
   }
 }
+
+const remove = (db) => {
+  return (request, response) => {
+    db.pokemonDB.remove(request.params.id, (error) => {
+      if (error) {
+        response.end("Oops, something went wrong!");
+      } else {
+        response.redirect('/');
+      }
+    })
+  }
+}
 /**
  * ===========================================
  * Export controller functions as a module
@@ -76,5 +88,6 @@ const update = (db) => {
   create,
   details,
   updateForm,
-  update
+  update,
+  remove
  }

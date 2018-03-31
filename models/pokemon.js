@@ -55,6 +55,13 @@ module.exports = (dbPool) => {
       dbPool.query(queryString, (error, results) => {
         callback(error);
       })
+    },
+
+    remove: (id, callback) => {
+      const queryString = `DELETE FROM pokemons WHERE id = ${id};`;
+      dbPool.query(queryString, (error) => {
+        callback(error);
+      })
     }
   }
 }
