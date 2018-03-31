@@ -23,9 +23,8 @@ const create = (db) => {
       if (error) {
         response.end('Oops, something happened! Please try again');
       } else {
-        response.cookie('loggedIn', true);
-        response.cookie('userName', request.body.name);
-        response.cookie('userId', queryResult);
+        response.cookie('loggedin', true);
+        response.cookie('userid', queryResult);
         response.redirect('/');
       }
     });
@@ -33,19 +32,19 @@ const create = (db) => {
 }
 
 const logout = (request, response) => {
-  response.clearCookie('loggedIn');
+  response.clearCookie('loggedin');
+  response.clearCookie('userid');
   response.redirect(301, '/');
 }
 
 const login = (db) => {
   return (request, response) => {
     db.userDB.login(request.body, (error, queryResult) => {
-      if (queryResult == false) {
+      if (queryResult.authenticated == false) {
         response.render('user/login', { invalidUser: true });
       } else {
-        response.cookie('loggedIn', true);
-        response.cookie('userName', request.body.name);
-        response.cookie('userId', queryResult);
+        response.cookie('loggedin', true);
+        response.cookie('userid', queryResult.user_id);
         response.redirect('/');
       }
     })

@@ -30,7 +30,9 @@ const create = (db) => {
 }
 const details = (db) => {
   return (request, response) => {
-    db.pokemonDB.details(request.params.id, (error, queryResults) => {
+    db.pokemonDB.details({user_id: request.cookies["userid"],
+                          pokemon_id: request.params.id
+                         }, (error, queryResults) => {
       if (error) {
         response.end('What pokemon is this?');
       } else {

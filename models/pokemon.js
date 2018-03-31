@@ -43,8 +43,19 @@ module.exports = (dbPool) => {
       })
     },
 
-    details: (id, callback) => {
-      const queryString = `SELECT * FROM pokemons WHERE id = ${id};`;
+    details: (obj, callback) => {
+      const queryString = `SELECT
+                               P.*,
+                               CASE WHEN UP.pokemon_id IS NULL
+                                     AND U.admin                   THEN true
+                                    WHEN UP.pokemon_id IS NOT NULL
+                                     AND UP.user_id = U.id         THEN true
+                                                                   ELSE false END AS editable
+                           FROM pokemons P
+                           LEFT JOIN user_pokemon UP ON P.id = UP.pokemon_id
+                           CROSS JOIN users U
+                           WHERE P.id = ${obj.pokemon_id}
+                             AND U.id = ${obj.user_id};`;
       dbPool.query(queryString, (error, results) => {
         callback(error, results.rows[0]);
       })
