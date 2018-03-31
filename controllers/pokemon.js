@@ -61,5 +61,13 @@ module.exports = {
       res.render('pokemon/edit', context);
     };
     db.pokemons.edit(pokemonid, callback);
+  },
+  update: (req, res) => {
+    let pokemonDetails = req.body;
+    let pokemonid = req.params.id;
+    let callback = () => {
+      res.redirect('/pokemons/'+pokemonid);
+    };
+    db.pokemons.update(pokemonid, pokemonDetails, callback);
   }
 };

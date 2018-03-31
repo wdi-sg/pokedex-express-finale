@@ -1,5 +1,5 @@
 {{#if pokemon}}
-<form action="/pokemons/{{pokemon.id}}" method="post">
+<form action="/pokemons/{{pokemon.id}}?_method=PUT" method="post">
 
   Num: <input type="text" name="num" value="{{pokemon.num}}"><br>
   Name: <input type="text" name="name" value="{{pokemon.name}}"><br>

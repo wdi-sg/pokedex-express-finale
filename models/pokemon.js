@@ -47,6 +47,19 @@ module.exports = (pool) => {
       pool.query(queryString, (err, res) => {
         callback(res.rows[0]);
       });
+    },
+    update: (pokemonid, pokemonDetails, callback) => {
+      let queryString = 'UPDATE pokemons SET (num,name,weight,height,img) = ' +
+        '($1,$2,$3,$4,$5) WHERE pokemons.id='+pokemonid+';';
+      //console.log(queryString);
+      let values = [pokemonDetails.num, pokemonDetails.name,
+      pokemonDetails.weight, pokemonDetails.height, pokemonDetails.img];
+      //console.log(values);
+      pool.query(queryString,values, (err, res) => {
+        //console.log(res);
+        callback(res);
+
+      });
     }
   };
 };
