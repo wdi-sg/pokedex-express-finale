@@ -23,24 +23,24 @@
 const db = require('../db.js');
 
 module.exports = {
-    index: (req, res) => {
-      let callback = (data) => {
-        let context = {
-          data
-        };
-        res.render('pokemon/index',context);
+  index: (req, res) => {
+    let callback = (data) => {
+      let context = {
+        data
       };
-      db.pokemons.all(callback);
+      res.render('pokemon/index',context);
+    };
+    db.pokemons.all(callback);
 
-    },
+  },
   new: (req, res) => {
-      res.render('pokemon/new');
+    res.render('pokemon/new');
   },
   create: (req, res) => {
     let pokemonDetails = req.body;
     console.log(req);
     let callback = (data) => {
-        res.send(data);
+      res.send(data);
     };
     db.pokemons.new(pokemonDetails, callback);
   }
