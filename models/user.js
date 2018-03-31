@@ -19,8 +19,8 @@ module.exports = function(dbPool){
  		newUserEntry : function(userInput,callback){
  			bcrypt.hash(userInput.password,2,(err,hash)=>{
  				userInput.password=hash;
- 				queryText= 'insert into users (username,email,password) values($1,$2,$3)';
- 				values=[];
+ 				let queryText= 'insert into users (username,email,password) values($1,$2,$3)';
+ 				let values=[];
  				let keys=Object.keys(userInput);
  				for(i=0;i<keys.length;i++){
  					values.push(userInput[keys[i]]);
@@ -28,6 +28,24 @@ module.exports = function(dbPool){
  				dbPool.query(queryText,values,(err,dbRes)=>{
  					callback(err,dbRes);
  				});
+ 			});
+ 		},
+
+ 		login: function(userInput,callback){
+
+ 			let queryText='select * from users where username='+"'"+userInput.username+"'";
+ 			dbPool.query(queryText,(err,dbRes)=>{
+ 				console.log(dbRes.rows);
+ 				if(err){
+ 					console.log("sql error",err.message);
+ 				}else if(dbRes.rows.length==0){
+ 					callback(err,dbRes);
+ 				}else {
+ 					hashedPw = dbRes.rows[0].password;
+ 					bcrypt.compare(userInput.password,hashedPw,(err,dbRes)=>{
+ 						callback(err,dbRes);
+ 					});	
+ 				}	
  			});
  		}
  	}

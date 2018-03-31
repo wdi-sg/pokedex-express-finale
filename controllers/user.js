@@ -13,7 +13,6 @@
  * Controller logic
  * ===========================================
  */
-
 module.exports=function(db){
 
 	return {
@@ -26,6 +25,26 @@ module.exports=function(db){
 			db.userModel.newUserEntry(sReq.body,(err,dbRes)=>{
 				sRes.send('Submitted');
 			})
+		},
+
+		login: function(sReq,sRes){
+			db.userModel.login(sReq.body,(err,dbRes)=>{
+				if(err){
+					console.log(err.message);
+				}else if(dbRes==true){
+					sRes.render('pokemon/new');
+				}else if (dbRes==false){
+					let context ={
+						incorrectPw:true
+					}
+					sRes.render('home',context);
+				}else if(dbRes.rows.length==0){
+					let context = {
+						noSuchUser:true
+					};
+					sRes.render('home',context);
+				}
+			});
 		}
 
 	};

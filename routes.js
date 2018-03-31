@@ -11,8 +11,11 @@
 module.exports = function (app,db) {
 	const userController=require('./controllers/user')(db);
 
+	
 	app.get('/users/new',userController.getNewUserForm);
-
 	app.post('/users/new',userController.submitNewUserForm);
+
+	app.post('/users/login',userController.login);
+
 
 };

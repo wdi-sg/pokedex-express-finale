@@ -18,6 +18,7 @@ const handlebars=require('express-handlebars');
 const app = express();
 // Set up middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Set handlebars to be the default view engine
 const handlebarsConfig={
@@ -41,7 +42,15 @@ routes(app,db);
 
 // Root GET request (it doesn't belong in any controller file)
 app.get('/',(sReq,sRes)=>{
-	sRes.send('Hi');
+
+	let queryText=('select * from pokemons')
+	db.dbPool.query(queryText,(err,dbRes)=>{
+		let context = {
+			pokemon: dbRes.rows
+		}
+		sRes.render('home',context);
+	})
+
 })
 
 // Catch all unmatched requests and return 404 not found page
