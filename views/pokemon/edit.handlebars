@@ -1,0 +1,19 @@
+{{#if pokemon}}
+<form action="/pokemons/{{pokemon.id}}?_method=PUT" method="post">
+
+  Num: <input type="text" name="num" value="{{pokemon.num}}"><br>
+  Name: <input type="text" name="name" value="{{pokemon.name}}"><br>
+  Weight: <input type="text" name="weight" value="{{pokemon.weight}}"><br>
+  Height: <input type="text" name="height" value="{{pokemon.height}}"><br>
+  Image Link: <input type="text" name="img" value="{{pokemon.img}}"><br>
+  <button type="submit">Edit Pokemon</button>
+
+</form>
+
+<form action="/pokemons/{{pokemon.id}}?_method=DELETE" method="post">
+  <button type="submit">Delete</button>
+</form>
+
+{{else}}
+NO SUCH POKEMON!
+{{/if}}

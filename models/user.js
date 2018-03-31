@@ -16,3 +16,26 @@
  * Export model functions as a module
  * ===========================================
  */
+const bcrypt = require('bcrypt');
+
+module.exports = (pool) => {
+  return {
+    new: (userDetails, callback) => {
+      bcrypt.hash(userDetails.password, 10, function(err, hash) {
+        // Store hash in your password DB.
+
+        let queryString = 'INSERT INTO users (id, name, email, password)' +
+          'VALUES ($1, $2, $3, $4)';
+        let values = [userDetails.id, userDetails.name, userDetails.email,
+        hash];
+        console.log(queryString);
+        console.log('values: ', values);
+        pool.query(queryString, values, (err, res) => {
+          console.log("USER ADDED");
+          //console.log(res);
+          callback(res);
+        });
+      });
+    }
+  };
+};
