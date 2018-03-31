@@ -1,13 +1,13 @@
 {{#if loggedIn}}
-  <form method='GET' action="../controllers/users/new">
-    <button>Log Out</button>
+  <form method='POST' action="/users/logout">
+    <button type="submit">Log Out</button>
   </form>
 {{else}}
-  <form method='GET' action="../controllers/users/new">
-    <button>Register</button>
+  <form method='GET' action="/users/new">
+    <button type="submit">Register</button>
   </form>
-  <form method='GET' action="../controllers/users/login">
-    <button>Log In</button>
+  <form method='GET' action="/users/login">
+    <button type="submit">Log In</button>
   </form>
 {{/if}}
 <div class="pokemon-list">  

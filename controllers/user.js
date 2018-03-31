@@ -31,6 +31,15 @@ const create = (db) => {
     });
   }
 }
+
+const logout = (request, response) => {
+  response.clearCookie('loggedIn');
+  response.redirect(301, '/');
+}
+
+const loginForm = (request, response) => {
+  response.render('user/login');
+}
 /**
  * ===========================================
  * Export controller functions as a module
@@ -39,5 +48,7 @@ const create = (db) => {
 
 module.exports = {
   newForm,
-  create
+  create,
+  logout,
+  loginForm
 }
