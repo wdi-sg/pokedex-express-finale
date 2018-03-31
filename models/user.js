@@ -20,11 +20,20 @@ const bcrypt = require('bcrypt');
 module.exports = (dbPool) => {
   return {
     create: (user, callback) => {
-      bcrypt.hash(user.password, 1, (err, hash) => {
-        const queryString = `INSERT INTO users (name, email, password) VALUES ('${user.name}', '${user.email}', '${hash}') RETURNING id;`;
-        dbPool.query(queryString, (err2, results) => {
-          callback(err2, results.rows[0].id);
-        })
+      const checkDuplicate = `SELECT * FROM users WHERE email = '${user.email}';`
+      dbPool.query(checkDuplicate, (err, results) => {
+        if (results.rowCount > 0) {
+          callback(err, { duplicate: true });
+        } else {
+          bcrypt.hash(user.password, 1, (err2, hash) => {
+            const queryString = `INSERT INTO users (name, email, password) VALUES ('${user.name}', '${user.email}', '${hash}') RETURNING id;`;
+            dbPool.query(queryString, (err3, results3) => {
+              callback(err3, { duplicate: false,
+                               user_id: results3.rows[0].id
+                             });
+            })
+          })
+        }
       })
     },
 

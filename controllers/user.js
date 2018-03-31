@@ -23,11 +23,15 @@ const create = (db) => {
       if (error) {
         response.end('Oops, something happened! Please try again');
       } else {
-        response.cookie('loggedin', true);
-        response.cookie('userid', queryResult);
-        response.redirect('/');
+        if (queryResult.duplicate == true) {
+          response.render('user/new', { duplicateUser: true });
+        } else {
+          response.cookie('loggedin', true);
+          response.cookie('userid', queryResult.user_id);
+          response.redirect('/');
+        }
       }
-    });
+    })
   }
 }
 

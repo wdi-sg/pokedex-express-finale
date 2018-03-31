@@ -5,6 +5,9 @@
   <input type="text" name="name">
   <p>Email:</p>
   <input type="text" name="email">
+  {{#if duplicateUser}}
+  <p class="error-message">This email is already taken.</p>
+  {{/if}}
   <p>Password:</p>
   <input type="password" name="password">
   <p><button type="submit" name="submit">Create Account</button></p>
