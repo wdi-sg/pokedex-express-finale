@@ -32,19 +32,16 @@ module.exports=function(db){
 				if(err){
 					console.log(err.message);
 				}else if (dbRes==false){
-					let context ={
-						incorrectPw:true
-					}
-					sRes.render('home',context);
+					sRes.redirect('/?error=invalidpassword');
 				}else if(dbRes.rows.length==0){
-					let context = {
-						noSuchUser:true
-					};
-					sRes.render('home',context);
+					sRes.redirect('/?error=noUser')
 				}else{
 					let context = {
-						pokemon: dbRes.rows
+						pokemon: dbRes.rows,
+						username: sReq.body.username
 					}
+					sRes.cookie('loggedin',true);
+					sRes.cookie('username',sReq.body.username);
 					sRes.render('pokemon/new',context);
 				}
 			});

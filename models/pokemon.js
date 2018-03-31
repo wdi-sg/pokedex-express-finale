@@ -15,14 +15,20 @@
  * ===========================================
  */
 
- module.exports = function(dbPool){
+module.exports = function(dbPool){
  	return{
- 		newPokemon: (userInput,callback)=>{
- 			let queryText="insert into pokemons (num,name,img,weight,height) values($1,$2,$3,$4,$5)";
- 			let values=[userInput.num,userInput.name,userInput.img,userInput.weight,userInput.height];
- 			dbPool.query(queryText,values,(err,dbRes)=>{
- 				callback(err,dbRes);
- 			})
+ 		newPokemon: (sReq,callback)=>{
+ 			let queryText='select * from users where username='+"'"+sReq.cookies.username+"'";
+ 			dbPool.query(queryText,(err,dbRes)=>{
+ 				queryText='insert into user_created_pokemons (user_id,num,name,img,weight,height) values($1,$2,$3,$4,$5,$6)';
+ 				let values=[dbRes.rows[0].id,sReq.body.num,sReq.body.name,sReq.body.img,sReq.body.weight,sReq.body.height];
+ 				dbPool.query(queryText,values,(err,dbRes)=>{
+ 					if(err){
+ 						console.log('error',err.message);
+ 					}
+ 					callback(err,dbRes);
+ 				});
+ 			});
  		}
  	}
- }
+}

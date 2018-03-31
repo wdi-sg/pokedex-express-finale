@@ -1,13 +1,17 @@
-<h3>Create your pokemon</h3>
+<h3>Hi {{username}},create your pokemon</h3>
+<br>
+<p>You can either create your own pokemon or you can pin one of the existing pokemons below</p>
+<br>
 <form method="POST" action="/pokemon/new">
 	Num: <input type="text" name="num">
-	Name: <input type="text" name="pokemonName">
+	Name: <input type="text" name="name">
 	Img: <input type="text" name="img">
 	Weight: <input type="text" name="weight">
 	Height: <input type="text" name="height">
 	<input type="submit" value="Create Pokemon">
 </form>
-
+<br>
+<br>
 <div class="container">
 	<div class="row">
 		{{#each pokemon}}
