@@ -16,9 +16,10 @@
  */
 module.exports = (pool) => {
   return {
-    new: (userDetails) => {
-      pool.query(queryString, values, (err, res) => {
-        
+    all: (callback) => {
+      let queryString = 'SELECT * FROM pokemons;';
+      pool.query(queryString, (err, res) => {
+        callback(res.rows);
       });
     }
   };

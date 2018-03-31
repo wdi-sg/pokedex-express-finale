@@ -19,3 +19,18 @@
  * Export controller functions as a module
  * ===========================================
  */
+
+const db = require('../db.js');
+
+module.exports = {
+    index: (req, res) => {
+      let callback = (data) => {
+        let context = {
+          data
+        };
+        res.render('pokemon/index',context);
+      };
+      db.pokemons.all(callback);
+
+    }
+};

@@ -1,0 +1,10 @@
+{{#each data}}
+  <div class='pokemon-card'>
+    <div>ID: {{this.id}}</div> 
+    <div>Num: {{this.num}}</div>
+    <div>Name: {{this.name}}</div>
+    <div>Weight: {{this.weight}}</div>
+    <div>Height: {{this.height}}</div>
+    <img src='{{this.img}}' alt='{{this.id}}'>
+  </div>
+  {{/each}}
