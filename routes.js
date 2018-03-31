@@ -15,8 +15,8 @@ module.exports = (app) => {
   app.get('/users/new', user.newForm);
   app.post('/users', user.create);
   app.get('/pokemons/', pokemon.index);
-//  app.get('/pokemons/new', pokemon.new);
-//  app.post('/pokemons', pokemon.create);
+  app.get('/pokemons/new', pokemon.new);
+  app.post('/pokemons', pokemon.create);
 //  app.get('/pokemons/:id', pokemon.show);
 //  app.get('/pokemons/:id/edit', pokemon.edit);
 //  app.put('/pokemons/:id', pokemon.update);

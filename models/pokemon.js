@@ -21,6 +21,18 @@ module.exports = (pool) => {
       pool.query(queryString, (err, res) => {
         callback(res.rows);
       });
+    },
+    new: (pokemonDetails, callback) => {
+        let queryString = 'INSERT INTO pokemons (id,num,name,weight,height,img)'+
+          'VALUES ($1,$2,$3,$4,$5,$6);';
+        let values = [pokemonDetails.id, pokemonDetails.num, pokemonDetails.name,
+        pokemonDetails.weight, pokemonDetails.height, pokemonDetails.img];
+        console.log(values);
+        pool.query(queryString,values, (err, res) => {
+            callback(res);
+
+        });
+
     }
   };
 };

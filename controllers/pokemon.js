@@ -32,5 +32,16 @@ module.exports = {
       };
       db.pokemons.all(callback);
 
-    }
+    },
+  new: (req, res) => {
+      res.render('pokemon/new');
+  },
+  create: (req, res) => {
+    let pokemonDetails = req.body;
+    console.log(req);
+    let callback = (data) => {
+        res.send(data);
+    };
+    db.pokemons.new(pokemonDetails, callback);
+  }
 };
