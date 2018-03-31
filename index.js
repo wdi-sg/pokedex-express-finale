@@ -7,6 +7,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 /**
  * ===================================
@@ -22,7 +23,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cookieParser());
 // parse application/json
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));

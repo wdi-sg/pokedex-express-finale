@@ -21,6 +21,7 @@
 const { Pool } = require('pg');
 const users = require('./models/user.js');
 const pokemons = require('./models/pokemon.js');
+const sessions = require('./models/session.js');
 
 const pool = new Pool({
   user: 'stonefruit',
@@ -46,5 +47,6 @@ pool.connect((err, client, done) => {
 module.exports = {
   pool: pool,
   users: users(pool),
-  pokemons: pokemons(pool)
+  pokemons: pokemons(pool),
+  sessions: sessions(pool)
 };

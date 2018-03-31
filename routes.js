@@ -10,10 +10,14 @@
 
 const user = require('./controllers/user');
 const pokemon = require('./controllers/pokemon');
+const session = require('./controllers/session');
 
 module.exports = (app) => {
   app.get('/users/new', user.newForm);
   app.post('/users', user.create);
+  app.get('/login', session.new);
+  app.post('/login', session.create);
+  app.delete('/logout', session.destroy);
   app.get('/pokemons/', pokemon.index);
   app.get('/pokemons/new', pokemon.new);
   app.post('/pokemons', pokemon.create);
