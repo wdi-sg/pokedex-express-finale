@@ -39,18 +39,12 @@ pool.on('error', (err, client) => {
 // callback - checkout a client
 pool.connect((err, client, done) => {
   if (err) throw err;
-  client.query('SELECT * FROM users WHERE id = $1', [1], (err, res) => {
-    done();
-
-    if (err) {
-      console.log(err.stack);
-    } else {
-      console.log("hi");
-    }
-  });
+  //console.log("INSIDE DB.JS");
+  //console.log(pool);
 });
 
 module.exports = {
-    users: users(pool),
-    pokemons: pokemons(pool)
+  pool: pool,
+  users: users(pool),
+  pokemons: pokemons(pool)
 };

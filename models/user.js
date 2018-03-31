@@ -18,13 +18,17 @@
  */
 module.exports = (pool) => {
   return {
-    new: (userDetails) => {
+    new: (userDetails, callback) => {
       let queryString = 'INSERT INTO users (id, name, email, password)' +
-                        'VALUES ($1, $2, $3, $4)';
+        'VALUES ($1, $2, $3, $4)';
       let values = [userDetails.id, userDetails.name, userDetails.email,
-                    userDetails.password];
+      userDetails.password];
+      console.log(queryString);
+      console.log('values: ', values);
       pool.query(queryString, values, (err, res) => {
-               console.log("USER ADDED");
+        console.log("USER ADDED");
+        console.log(res);
+        callback(res);
       });
     }
   };

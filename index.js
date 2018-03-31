@@ -53,5 +53,15 @@ server.on('close', () => {
   console.log('Closed express server');
 
   // close database connection pool
+  let db = require('./db.js');
+  db.pool.end();
+  setTimeout(() => {
+  //  console.log(db.pool);
+    process.exit( 0 );
+  },500);
+});
 
+process.on( "SIGINT", function() {
+  console.log( "got SIGINT" );
+  server.close();
 });

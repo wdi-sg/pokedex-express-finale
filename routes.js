@@ -9,11 +9,12 @@
  */
 
 const user = require('./controllers/user');
+const pokemon = require('./controllers/pokemon');
 
 module.exports = (app) => {
   app.get('/users/new', user.newForm);
   app.post('/users', user.create);
-//  app.get('/pokemons/', pokemon.index);
+  app.get('/pokemons/', pokemon.index);
 //  app.get('/pokemons/new', pokemon.new);
 //  app.post('/pokemons', pokemon.create);
 //  app.get('/pokemons/:id', pokemon.show);
