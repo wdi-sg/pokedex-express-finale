@@ -37,6 +37,21 @@ const logout = (request, response) => {
   response.redirect(301, '/');
 }
 
+const login = (db) => {
+  return (request, response) => {
+    db.userDB.login(request.body, (error, queryResult) => {
+      if (queryResult == false) {
+        response.render('user/login', { invalidUser: true });
+      } else {
+        response.cookie('loggedIn', true);
+        response.cookie('userName', request.body.name);
+        response.cookie('userId', queryResult);
+        response.redirect('/');
+      }
+    })
+  }
+}
+
 const loginForm = (request, response) => {
   response.render('user/login');
 }
@@ -50,5 +65,6 @@ module.exports = {
   newForm,
   create,
   logout,
-  loginForm
+  loginForm,
+  login
 }

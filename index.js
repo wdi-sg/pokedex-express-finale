@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override');
 const db = require('./db')
 
 
@@ -19,6 +20,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 
 // Set handlebars to be the default view engine
 const handlebarsConfig = {
@@ -41,7 +43,7 @@ require('./routes')(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
 app.get('/', (request, response) => {
-  const queryString = 'SELECT name FROM pokemons;'
+  const queryString = 'SELECT * FROM pokemons ORDER BY 1;'
   db.pool.query(queryString, (error, queryResults) => {
     response.render('home', { pokemons: queryResults.rows,
                               loggedIn: request.cookies["loggedIn"]

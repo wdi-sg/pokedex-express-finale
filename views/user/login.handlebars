@@ -1,10 +1,13 @@
 <h2>Welcome Back!</h2>
 <div class="form-wrapper">
-  <form method="POST" action="/users/login">
+  <form class="left-aligned-form" method="POST" action="/users/login">
   <p>Email:</p>
   <input type="text" name="email">
   <p>Password:</p>
   <input type="password" name="password">
+  {{#if invalidUser}}
+  <p class="error-message">Invalid email or password!</p>
+  {{/if}}
   <p><button type="submit" name="submit">Log In</button></p>
 </form>
 </div>

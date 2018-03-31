@@ -27,7 +27,15 @@ module.exports = (dbPool) => {
           callback(err2, results.rows[0].id);
         })
       })
+    },
 
+    login: (user, callback) => {
+      const queryString = `SELECT password FROM users WHERE email = '${user.email}';`;
+      dbPool.query(queryString, (err, queryResult) => {
+        bcrypt.compare(user.password, queryResult.rows[0].password, (err2, results) => {
+          callback(err2, results);
+        })
+      })
     }     
   }
 }

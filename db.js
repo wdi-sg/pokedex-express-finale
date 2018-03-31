@@ -9,6 +9,7 @@
  */
 const pg = require('pg');
 const userDB = require('./models/user');
+const pokemonDB = require('./models/pokemon');
 
 const configs = {
   user: 'Isa',
@@ -25,5 +26,6 @@ pool.on('error', (err) => {
 
 module.exports = {
   pool: pool,
-  userDB: userDB(pool)
+  userDB: userDB(pool),
+  pokemonDB: pokemonDB(pool)
 }

@@ -1,4 +1,7 @@
 {{#if loggedIn}}
+  <form method='GET' action="/pokemons/new">
+    <button type="submit">Create New Pokemon</button>
+  </form>
   <form method='POST' action="/users/logout">
     <button type="submit">Log Out</button>
   </form>
@@ -10,8 +13,14 @@
     <button type="submit">Log In</button>
   </form>
 {{/if}}
-<div class="pokemon-list">  
+<div class="pokemon-grid-container">  
   {{#each pokemons}}
-  <div class="pokemon">{{this.name}}</div>
+  <a href="/pokemons/{{this.id}}" class="pokemon-grid-item">
+    <div class="pokemon-image-container">
+      <img class="pokemon-image" src="{{this.img}}">
+    </div>
+    <p class="pokemon-num">#{{this.num}}</p>
+    <p class="pokemon-name">{{this.name}}</p>
+  </a>
   {{/each}}
 </div>    
