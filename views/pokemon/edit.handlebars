@@ -9,6 +9,11 @@
   <button type="submit">Edit Pokemon</button>
 
 </form>
+
+<form action="/pokemons/{{pokemon.id}}?_method=DELETE" method="post">
+  <button type="submit">Delete</button>
+</form>
+
 {{else}}
 NO SUCH POKEMON!
 {{/if}}

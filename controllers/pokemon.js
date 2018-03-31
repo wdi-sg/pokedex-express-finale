@@ -69,5 +69,14 @@ module.exports = {
       res.redirect('/pokemons/'+pokemonid);
     };
     db.pokemons.update(pokemonid, pokemonDetails, callback);
+  },
+  destroy: (req, res) => {
+    let pokemonid = req.params.id;
+    let callback = () => {
+      res.redirect('/pokemons');
+    };
+    db.pokemons.destroy(pokemonid, callback);
+    
+
   }
 };

@@ -20,5 +20,5 @@ module.exports = (app) => {
   app.get('/pokemons/:id', pokemon.show);
   app.get('/pokemons/:id/edit', pokemon.edit);
   app.put('/pokemons/:id', pokemon.update);
-//  app.delete('/pokemons/:id', pokemon.destroy);
+  app.delete('/pokemons/:id', pokemon.destroy);
 };

@@ -6,5 +6,8 @@
     <div>Weight: {{this.weight}}</div>
     <div>Height: {{this.height}}</div>
     <img src='{{this.img}}' alt='{{this.id}}'>
+    <form method='GET' action='/pokemons/{{this.id}}/edit'>
+        <button type='submit'>Edit</button>
+    </form>
   </div>
 {{/each}}

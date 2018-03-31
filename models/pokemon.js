@@ -60,6 +60,12 @@ module.exports = (pool) => {
         callback(res);
 
       });
+    },
+    destroy: (pokemonid, callback) => {
+      let queryString = 'DELETE FROM pokemons WHERE pokemons.id=' + pokemonid + ';';
+      pool.query(queryString, (err, res) => {
+        callback(res);
+      });
     }
   };
 };
