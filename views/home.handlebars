@@ -13,6 +13,23 @@
     <button type="submit">Log In</button>
   </form>
 {{/if}}
+
+{{#if loggedIn}}
+  <h2>---Your Pokemons---</h2>
+  <div class="pokemon-grid-container">  
+    {{#each userPokemons}}
+    <a href="/pokemons/{{this.id}}" class="pokemon-grid-item">
+      <div class="pokemon-image-container">
+        <img class="pokemon-image" src="{{this.img}}">
+      </div>
+      <p class="pokemon-num">#{{this.num}}</p>
+      <p class="pokemon-name">{{this.name}}</p>
+    </a>
+    {{/each}}
+  </div>
+{{/if}}
+
+<h2>---Pokemons---</h2>
 <div class="pokemon-grid-container">  
   {{#each pokemons}}
   <a href="/pokemons/{{this.id}}" class="pokemon-grid-item">

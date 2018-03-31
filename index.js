@@ -43,12 +43,15 @@ require('./routes')(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
 app.get('/', (request, response) => {
-  const queryString = 'SELECT * FROM pokemons ORDER BY 1;'
+  const queryString = 'SELECT P.* FROM pokemons P LEFT JOIN user_pokemon UP ON P.id = UP.pokemon_id WHERE UP.pokemon_id IS NULL ORDER BY 1;'
+  const queryString2 = 'SELECT P.* FROM pokemons P JOIN user_pokemon UP ON P.id = UP.pokemon_id ORDER BY 1;'
   db.pool.query(queryString, (error, queryResults) => {
-    response.render('home', { pokemons: queryResults.rows,
-                              loggedIn: request.cookies["loggedIn"]
-
-                            });
+    db.pool.query(queryString2, (error2, queryResults2) => {
+      response.render('home', { pokemons: queryResults.rows,
+                                userPokemons: queryResults2.rows,
+                                loggedIn: request.cookies["loggedIn"]
+                              });
+    })
   })
 })
 

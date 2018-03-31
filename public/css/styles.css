@@ -21,6 +21,15 @@ body {
   color: red;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
 button {
   width: 200px;
   height: 50px;
@@ -46,6 +55,10 @@ button:hover {
   width: 80%;
   padding: 0;
   justify-items: center;
+}
+
+.pokemon-grid-item:hover {
+  transform: scale(1.1);
 }
 
 .pokemon-image-container {

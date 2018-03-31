@@ -19,7 +19,7 @@ const newForm = (request, response) => {
 
 const create = (db) => {
   return (request, response) => {
-    db.pokemonDB.create(request.body, (error) => {
+    db.pokemonDB.create(Object.assign(request.body, request.cookies), (error) => {
       if (error) {
         response.end('Oops, something went wrong. Please try again!');
       } else {
