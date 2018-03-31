@@ -33,6 +33,13 @@ module.exports = (pool) => {
 
         });
 
+    },
+    show: (pokemonid, callback) => {
+        let queryString = 'SELECT * FROM pokemons WHERE pokemons.id='+
+          pokemonid + ';';
+        pool.query(queryString, (err, res) => {
+            callback(res.rows[0]);
+        });
     }
   };
 };

@@ -43,5 +43,13 @@ module.exports = {
       res.send(data);
     };
     db.pokemons.new(pokemonDetails, callback);
+  },
+  show: (req, res) => {
+    let pokemonid = req.params.id;
+    let callback = (data) => {
+        res.send(data);
+    };
+    db.pokemons.show(pokemonid, callback);
+
   }
 };
