@@ -18,6 +18,16 @@ module.exports = function(db){
 					sRes.send('created');
 				}
 			});
+		},
+
+		pinPokemon: (sReq,sRes)=>{
+			db.pokemonModel.pinPokemon(sReq,(err,dbRes)=>{
+				// console.log(dbRes.rows);
+				if(err){
+					console.log(err.message);
+				}
+				sRes.send({status:'added',id:sReq.body.pokemonId});
+			});
 		}
 	}
 };

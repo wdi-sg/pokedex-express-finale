@@ -45,6 +45,12 @@ module.exports=function(db){
 					sRes.render('pokemon/new',context);
 				}
 			});
+		},
+
+		logout: function(sReq,sRes){
+			sRes.clearCookie('loggedin');
+			sRes.clearCookie('username');
+			sRes.redirect('/');
 		}
 
 	};

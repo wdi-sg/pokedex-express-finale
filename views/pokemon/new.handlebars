@@ -1,7 +1,16 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/newPokemon.css">
+</head>
+
 <h3>Hi {{username}},create your pokemon</h3>
 <br>
 <p>You can either create your own pokemon or you can pin one of the existing pokemons below</p>
 <br>
+
+<form method="GET" action="/users/logout">
+	<input type="submit" value="Log Out">
+</form>
+
 <form method="POST" action="/pokemon/new">
 	Num: <input type="text" name="num">
 	Name: <input type="text" name="name">
@@ -16,9 +25,10 @@
 	<div class="row">
 		{{#each pokemon}}
 		<div class="border d-flex flex-column align-items-center pokemon_container">
-			<p class="p-2 pokemon_name">{{this.name}}</p>
+			<p class="p-2 pokemon_name">{{this.name}} <span class="pin" id={{this.id}}>Pin</span></p>
 			<img class="p-2 pokemon_img" src="{{this.img}}">
 		</div>
 		{{/each}}	
 	</div>
 </div>
+<script type="text/javascript" src="/js/newPokemon.js"></script>

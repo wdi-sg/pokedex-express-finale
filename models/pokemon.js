@@ -29,6 +29,21 @@ module.exports = function(dbPool){
  					callback(err,dbRes);
  				});
  			});
+ 		},
+
+ 		pinPokemon: (sReq,callback)=>{
+ 			let queryText = 'select id from users where username='+"'"+sReq.cookies.username+"'";
+ 			dbPool.query(queryText,(err,dbRes)=>{
+ 				if(err){
+ 					console.log("cannot find userId",err.message);
+ 				}else{
+ 					queryText='insert into user_pin_pokemon (user_id,pokemon_id) values($1,$2)';
+ 					let values = [dbRes.rows[0].id,parseInt(sReq.body.pokemonId)];
+ 					dbPool.query(queryText,values,(err,dbRes)=>{
+ 						callback(err,dbRes);
+ 					});
+ 				}
+ 			})
  		}
  	}
 }
