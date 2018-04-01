@@ -29,6 +29,18 @@ const get = (allModels) => {
     };
 };
 
+const deletePokemon = (allModels) => {
+    return (request, response) => {
+        allModels.pokemon.deletePokemon(request.params.id, (error, queryResult) => {
+            if (error) {
+                response.sendStatus(500);
+            } else {
+                response.redirect('/');
+            }
+        });
+    };
+};
+
 const updateForm = (allModels) => {
     return (request, response) => {
         allModels.pokemon.get(request.params.id, (error, queryResult) => {
@@ -37,6 +49,7 @@ const updateForm = (allModels) => {
                 response.sendStatus(500);
             } else {
                 //render pokemon.handlerbars in pokemon view folder
+                console.log(queryResult.rows[0]);
                 response.render('pokemon/edit', { pokemon: queryResult.rows[0] });
             }
         });
@@ -58,9 +71,21 @@ const update = (allModels) => {
     };
 };
 
-const createForm = (request, response) => {
-    response.render('pokemon/new');
-}
+const createForm = (allModels) => {
+    return (request, response) => {
+        console.log('return in createForm...');
+        allModels.pokemon.createForm(request.body, (error, queryResult) => {
+            console.log('in allModels.pokemon.createForm...');
+
+            if (error) {
+                response.sendStatus(500);
+            } else {
+                let number = parseInt(queryResult.rows[0].count) + 1;
+                response.render('pokemon/new', { pokemon: { num: number } });
+            }
+        });
+    };
+};
 
 const create = (allModels) => {
     return (request, response) => {
@@ -86,6 +111,7 @@ const create = (allModels) => {
     };
 };
 
+
 /**
  * ===========================================
  * Export controller functions as a module
@@ -93,6 +119,7 @@ const create = (allModels) => {
  */
 module.exports = {
     get,
+    deletePokemon,
     updateForm,
     update,
     createForm,

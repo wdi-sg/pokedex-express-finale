@@ -41,5 +41,8 @@
         <br>
         <input name="submit" type="submit" />
     </form>
+    <form method="POST" action="/pokemons/{{pokemon.id}}?_method=DELETE">
+        <input type="submit" name="delete" value="Delete" />
+    </form>
 </body>
 </html>
