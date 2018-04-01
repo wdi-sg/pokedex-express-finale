@@ -44,11 +44,15 @@ module.exports = (dbPool) => {
         },
 
         login: (user, callback) => {
-            const queryString = "SELECT name AS user_name, password FROM users WHERE email = $1;";
-            const VALUES = user.email;
-            dbPool.query(questString, VALUES, (error, queryResult) => {
-                bcrypt.compare(user.password, queryResult.rows[0].password, (err, results) => {
-                    callback(err, { user_id: queryResult.rows[0].user_id, authenticated: results });
+            const queryString = "SELECT * FROM users WHERE email = $1";
+            const VALUES = [user.email];
+            dbPool.query(queryString, VALUES, (error, queryResult) => {
+                bcrypt.compare(user.password, queryResult.rows[0].password, (err, res) => {
+                    if (res) {
+                        callback(error, queryResult);
+                    } else {
+                        callback(error, queryResult);
+                    }
                 });
             });
         }

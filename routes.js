@@ -11,7 +11,7 @@
 const pokemons = require('./controllers/pokemon');
 const users = require('./controllers/user');
 
-module.exports = (app, db) => {
+module.exports = (app, allModels) => {
     /*
      *  =========================================
      *  Users
@@ -19,12 +19,12 @@ module.exports = (app, db) => {
      */
     // CRUD users
     app.get('/users/new', users.newForm);
-    app.post('/users', users.create(db));
+    app.post('/users', users.create(allModels));
 
     // Authentication
-    // app.post('/users/logout', users.logout);
-    // app.get('/users/login', users.loginForm);
-    // app.post('/users/login', users.login);
+    app.delete('/users/logout', users.logout);
+    app.get('/users/login', users.loginForm);
+    app.post('/users/login', users.login(allModels));
 
     /*
      *  =========================================

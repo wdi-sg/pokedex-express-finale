@@ -43,13 +43,7 @@ const create = (allModels) => {
     };
 };
 
-const logout = (request, response) => {
-    response.clearCookie('loggedIn');
-    response.redirect(301, '/');
-};
-
 const loginForm = (request, response) => {
-
     if (request.cookies['loggedIn'] === 'true') {
         response.redirect('/');
     } else {
@@ -57,19 +51,25 @@ const loginForm = (request, response) => {
     }
 };
 
-const login = (db) => {
+const login = (allModels) => {
     return (request, response) => {
-        allModels.user.create(request.body, (request, response) => {
+        allModels.user.login(request.body, (error, queryResult) => {
             if (queryResult) {
-                let userName = request.body.name;
-                response.cookie('loggedIn');
-                response.cookie('username', username);
+                let userName = queryResult.rows[0].name;
+                response.cookie('loggedIn', true);
+                response.cookie('username', userName);
                 response.redirect('/');
             } else {
                 response.redirect('/users/login');
             }
         });
     };
+};
+
+const logout = (request, response) => {
+    response.clearCookie('loggedIn');
+    response.clearCookie('username');
+    response.redirect(301, '/');
 };
 
 /**
