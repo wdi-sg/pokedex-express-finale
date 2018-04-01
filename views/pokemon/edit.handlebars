@@ -1,0 +1,15 @@
+<form method="POST" action="/pokemons/{{id}}/edit?_method=PUT">
+  <div class="details-image-container">
+    <img class="pokemon-image" src="{{img}}">
+  </div>
+  <p><input type="text" name="img" value="{{img}}"></p>
+  <h2><input type="text" name="name" value="{{name}}"></h2>
+  <p>Weight: <input type="text" name="weight" value="{{weight}}"></p>
+  <p>Height: <input type="text" name="height" value="{{height}}"></p>
+  <form method="GET" action="/pokemons/{{id}}/edit">
+    <button type="submit">Save Changes</button>
+  </form>
+  <form method="GET" action="/pokemons/{{id}}"">
+    <button class="negative-button" type="submit">Cancel</button>
+  </form>
+</form>

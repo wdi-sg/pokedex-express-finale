@@ -1,0 +1,134 @@
+body {
+  margin: 0 0 100px 0;
+  box-sizing: border-box;
+}
+
+.main-body {
+  margin: 20px 30px;
+  text-align: center;
+}
+
+.form-wrapper {
+  display: inline-block;
+  width: 250px;
+}
+
+.left-aligned-form {
+  text-align: left;
+}
+
+.error-message {
+  color: red;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-right: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.negative-button {
+  background-color: red;
+}
+
+.pokemon-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 50px 30px;
+  margin: 50px auto;
+  width: 80%;
+  padding: 0;
+  justify-items: center;
+}
+
+.pokemon-grid-item:hover {
+  transform: scale(1.1);
+}
+
+.details-image-container {
+  border-radius: 5px;
+  background-color: #EEE;
+  width: 180px;
+  height: 220px;
+  display: inline-block;
+}
+
+.pokemon-image-container {
+  border-radius: 5px;
+  background-color: #EEE;
+  width: 180px;
+  height: 220px;
+}
+
+.pokemon-image {
+  width: 100%;
+}
+
+.pokemon-num, .pokemon-name {
+  text-align: left;
+  font-family: 'Oswald', sans-serif;
+}
+
+.pokemon-num {
+  color: slategrey;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pokemon-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+@media screen and (max-width: 1050px) {
+  .pokemon-grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .pokemon-grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .pokemon-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: black;
+  color: white;
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+    
