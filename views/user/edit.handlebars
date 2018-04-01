@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit user</title>
+</head>
+<body>
+  <h4>Editing: {{user.name}}</h4>
+  <form class="user-form" method="POST" action="/{{user.id}}?_method=PUT">
+    <div class="user-attribute">
+      name: <input name="name" type="text" value="{{user.name}}"/>
+    </div>
+    <div class="user-attribute">
+      email: <input name="email" type="email" value="{{user.email}}"/>
+    </div>
+    <div class="user-attribute">
+      password: <input name="password" type="password" value="{{user.password}}"/>
+    </div>
+    <input name="submit" type="submit"/>
+  </form>
+</body>
+</html>

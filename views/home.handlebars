@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Pokedex</title>
+</head>
+<body>
+  <h1>Welcome back to the online Pokedex{{#if loggedIn }}, {{username}}{{/if}}!</h1>
+  {{#if loggedIn }}
+    <form action="/users/logout" method="post">
+      <input name="logout" type="submit" value="Logout"/>
+      <br><br>
+    </form>
+  {{/if}}
+  {{#each pokemon}}
+    <li>{{this.name}}</li>
+  {{/each}}
+</body>
+</html>
