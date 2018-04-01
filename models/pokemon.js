@@ -14,3 +14,16 @@
  * Export model functions as a module
  * ===========================================
  */
+
+ module.exports = function (dbPool) {
+     // Note: dbPool is the connection pool that db.js will pass into this file
+     return {
+         create: async function (pokemonObj) {
+
+         },
+
+         getById: async function (id) {
+             
+         }
+     }
+ }

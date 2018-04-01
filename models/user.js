@@ -16,3 +16,26 @@
  * Export model functions as a module
  * ===========================================
  */
+
+ const bcrypt = require('bcrypt');
+
+ module.exports = function (dbPool) {
+     // Note: dbPool is the connection pool that db.js will pass into this model.
+     return {
+         create: async function (userObj) {
+
+         },
+
+         getById: async function (id) {
+
+         },
+
+         login: async function (userObj) {
+
+         },
+
+         update: async function (userObj) {
+
+         }
+     }
+ }
