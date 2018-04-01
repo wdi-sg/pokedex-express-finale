@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create New Pokemon</title>
+</head>
+<body>
+    <h1>Create New Pokemon</h1>
+    <form class="pokemon-form" method="POST" action="/pokemons">
+    <div class="pokemon-attribute">
+        Number: <input name="num" type="text" value="{{pokemon.num}}" readonly/>
+    </div>
+    <br>
+    <div class="pokemon-attribute">
+        Name:
+        <input name="name" type="text" />
+    </div>
+    <br>
+    <div class="pokemon-attribute">
+        Image:
+        <input name="img" type="text" />
+    </div>
+    <br>
+    <div class="pokemon-attribute">
+        Height:
+        <input name="height" type="text" />
+    </div>
+    <br>
+    <div class="pokemon-attribute">
+        Weight:
+        <input name="weight" type="text" />
+    </div>
+    <br>
+    <input name="submit" type="submit" />
+    </form>
+</body>
+</html>

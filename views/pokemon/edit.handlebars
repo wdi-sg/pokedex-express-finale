@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Pokemon</title>
+</head>
+<body>
+    <h1>Editing: {{pokemon.name}}</h1>
+    <img src="{{pokemon.img}}" alt="{{pokemon.name}}" />
+    <form class="pokemon-form" method="POST" action="/pokemons/{{pokemon.id}}?_method=PUT">
+        <div class="pokemon-attribute">
+             Id:
+            <input name="id" type="text" value="{{pokemon.id}}" readonly />
+        </div>
+        <br>
+        <div class="pokemon-attribute">
+            Number: <input name="num" type="text" value="{{pokemon.num}}" readonly/>
+        </div>
+        <br>
+        <div class="pokemon-attribute">
+            Name:
+            <input name="name" type="text" value="{{pokemon.name}}" />
+        </div>
+        <br>
+        <div class="pokemon-attribute">
+            Image:
+            <input name="img" type="text" value="{{pokemon.img}}" />
+        </div>
+        <br>
+        <div class="pokemon-attribute">
+            Height:
+            <input name="height" type="text" value="{{pokemon.height}}" />
+        </div>
+        <br>
+        <div class="pokemon-attribute">
+            Weight:
+            <input name="weight" type="text" value="{{pokemon.weight}}" />
+        </div>
+        <br>
+        <input name="submit" type="submit" />
+    </form>
+    <form method="POST" action="/pokemons/{{pokemon.id}}?_method=DELETE">
+        <input type="submit" name="delete" value="Delete" />
+    </form>
+</body>
+</html>

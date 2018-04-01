@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokemon</title>
+</head>
+<body>
+    <h1>Pokemon : {{pokemon.name}}</h1>
+    <img src="{{pokemon.img}}" alt="{{pokemon.name}}" />   
+    <ul class="pokemon-list">
+        <li class="pokemon-attribute">
+            Id: {{pokemon.id}}
+        </li>
+        <li class="pokemon-attribute">
+            Number: {{pokemon.num}}
+        </li>
+        <li class="pokemon-attribute">
+            Name: {{pokemon.name}}
+        </li>
+        <li class="pokemon-attribute">
+            Image: {{pokemon.img}}
+        </li>
+        <li class="pokemon-attribute">
+            Height: {{pokemon.height}}
+        </li>
+        <li class="pokemon-attribute">
+            Weight: {{pokemon.weight}}
+        </li>
+    </ul>
+    <form method="POST" action="/pokemons/{{pokemon.id}}?_method=DELETE">
+    <input type="submit" name="delete" value="Delete" />
+    </form>
+</body>
+</html>
