@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Online Pokedex</title>
+</head>
+<body>
+    <h1>Welcome back to the Online Pokedex{{#if loggedIn}}, {{username}}<br>
+    <form action="users/logout?_method=delete" method="POST">
+        <input type="submit" value="Logout"><br><br>
+    </form>
+    {{else}}
+    <form>
+        <input type="button" value="Login" onclick="window.location.href='/users/login'"/>
+        </form>
+    {{/if}}</h1>
+    <p>{{#each pokemon}}
+    <li>{{this.name}}</li>
+    {{/each}}</p>
+</body>
+</html>
