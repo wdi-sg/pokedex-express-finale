@@ -32,8 +32,8 @@ module.exports = (app, allModels) => {
      *  =========================================
      */
     // CRUD pokemons
-    // app.get('/pokemons/:id/edit', pokemons.updateForm(allModels));
-    // app.post('/pokemons/:id/edit', pokemons.update(allModels));
+    app.get('/pokemons/:id/edit', pokemons.updateForm(allModels));
+    app.put('/pokemons/:id', pokemons.update(allModels));
     app.get('/pokemons/new', pokemons.createForm);
     app.post('/pokemons', pokemons.create(allModels));
     app.get('/pokemons/:id', pokemons.get(allModels));

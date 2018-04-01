@@ -41,6 +41,17 @@ module.exports = (dbPool) => {
             dbPool.query(queryString, VALUES, (error, queryResult) => {
                 callback(error, queryResult);
             });
+        },
+
+        update: (pokemon, callback) => {
+
+            const queryString = 'UPDATE pokemons SET name=$1, img=$2, height=$3, weight=$4 WHERE pokemons.id = $5';
+            const VALUES = [pokemon.name, pokemon.img, pokemon.height, pokemon.weight, parseInt(pokemon.id)];
+
+            //set up query to update data of a specific pokemon
+            dbPool.query(queryString, VALUES, (error, queryResult) => {
+                callback(error, queryResult);
+            });
         }
     };
 };

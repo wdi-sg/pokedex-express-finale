@@ -29,11 +29,34 @@ const get = (allModels) => {
     };
 };
 
-// const updateForm = (allModels) => {
-//     return (request, response) => {
-//         allModels.pokemon.get(request.params.id, )
-//     }
-// }
+const updateForm = (allModels) => {
+    return (request, response) => {
+        allModels.pokemon.get(request.params.id, (error, queryResult) => {
+            if (error) {
+                console.log('error getting pokemon: ', error);
+                response.sendStatus(500);
+            } else {
+                //render pokemon.handlerbars in pokemon view folder
+                response.render('pokemon/edit', { pokemon: queryResult.rows[0] });
+            }
+        });
+    };
+};
+
+const update = (allModels) => {
+    return (request, response) => {
+
+        allModels.pokemon.update(request.body, (error, queryResult) => {
+            let pokemon_id = request.params.id;
+
+            if (error) {
+                response.sendStatus(500);
+            } else {
+                response.redirect('/pokemons/' + pokemon_id);
+            }
+        });
+    };
+};
 
 const createForm = (request, response) => {
     response.render('pokemon/new');
@@ -70,8 +93,8 @@ const create = (allModels) => {
  */
 module.exports = {
     get,
-    // updateForm,
-    // update,
+    updateForm,
+    update,
     createForm,
     create
 }
