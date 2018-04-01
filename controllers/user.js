@@ -23,7 +23,7 @@ const create = (allModels) => {
         allModels.user.create(request.body, (error, queryResult) => {
 
             if (error) {
-                console.error('error ??? ', error);
+                console.error('error!!! ', error);
             }
 
             if (queryResult.rowCount >= 1) {
