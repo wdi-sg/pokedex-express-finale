@@ -8,40 +8,62 @@
  * to be imported (using `require(...)`) in `routes.js`.
  */
 
+const db = require('../db');
+const pokemon = require('../models/pokemon');
+
 /**
  * ===========================================
  * Controller logic
  * ===========================================
  */
 
- function getById(db) {
-     return function (request, response) {
-         // use the models/pokemon.js getById function to retrieve the pokemon
+async function getById(request, response) {
+    // use the models/pokemon.js getById function to retrieve the pokemon
+    let result = await pokemon.getById(request.params.id);
+    let context = { pokemon: result };
+    response.render('pokemon/show', context);
+};
 
-     };
- };
+async function updateForm(request, response) {
+    // show the form for updating the pokemon here. need to populate the form with the pokemon data
+    let result = await pokemon.getById(request.params.id);
+    let context = { pokemon: result };
+    response.render('pokemon/edit', context);
+};
 
- function updateForm(db) {
-     return function (request, response) {
-         // show the form for updating the pokemon here. need to populate the form with the pokemon data
-     };
- };
+async function update(request, response) {
+    // actually update the pokemon data in the database by using the models/pokemon.js update function
+    let pokemonObj = {
+        id: request.body.id,
+        name: request.body.name,
+        image: request.body.img,
+        weight: request.body.weight,
+        height: request.body.height
+    };
+    let result = await pokemon.update(pokemonObj);
+    response.redirect('/');
+};
 
- function update(db) {
-     return function (request, response) {
-         // actually update the pokemon data in the database by using the models/pokemon.js update function
-     };
- };
+function newForm(request, response) {
+    response.render('pokemon/new');
+};
 
- function createForm(request, response) {
-     response.render('pokemon/new');
- };
+async function create(request, response) {
+    // actually create the pokemon in the database by using the models/pokemon.js create function, then redirect to homepage
+    let pokemonObj = {
+        name: request.body.name,
+        image: request.body.img,
+        weight: request.body.weight,
+        height: request.body.height
+    };
+    let result = await pokemon.create(pokemonObj);
+    response.redirect('/');
+};
 
- function create(db) {
-     return function (request, response) {
-         // actually create the pokemon in the database by using the models/pokemon.js create function, then redirect to homepage
-     };
- };
+async function deleteById(request, response) {
+    await pokemon.deleteById(request.params.id);
+    response.redirect('/');
+}
 
 /**
  * ===========================================
@@ -49,9 +71,10 @@
  * ===========================================
  */
 module.exports = {
-    get: getById,
+    show: getById,
     updateForm: updateForm,
     update: update,
-    createForm: createForm,
-    create: create
+    newForm: newForm,
+    create: create,
+    delete: deleteById
 }

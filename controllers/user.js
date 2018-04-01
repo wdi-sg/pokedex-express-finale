@@ -8,6 +8,11 @@
  * to be imported (using `require(...)`) in `routes.js`.
  */
 
+const db = require('../db');
+const bcrypt = require('bcrypt');
+const config = require('../config');
+const user = require('../models/user');
+
 /**
  * ===========================================
  * Controller logic
@@ -18,23 +23,39 @@ function newForm (request, response) {
     response.render('user/new');
 }
 
-function create (db) {
-    return function (request, response) {
-        // create the user, then redirect to '/'
-    }
+async function create (request, response) {
+    // create the user, then redirect to '/'
+    await user.create({name: request.body.name, email: request.body.email, password: request.body.password})
+    response.cookie('loggedIn', 'true');
+    response.cookie('name', request.body.name);
+    response.redirect('/');
 }
 
 function logout (request, response) {
     // clear the cookies, then redirect to 301, '/'
-
+    response.clearCookie('loggedIn');
+    response.clearCookie('name');
+    response.redirect('/');
 }
 
 function loginForm (request, response) {
     response.render('user/login');
 }
 
-function login (request, response) {
+async function login (request, response) {
     // call on the models/user.js login function too log the user in here
+    let userObj = {
+        name: request.body.name,
+        password: request.body.password
+    };
+    let authenticate = await user.loginByName(userObj);
+    if (authenticate) {
+        response.cookie('loggedIn', 'true');
+        response.cookie('name', userObj.name);
+        response.redirect('/');
+    } else {
+        response.redirect('/users/login');
+    }
 }
 
 /**

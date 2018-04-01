@@ -10,8 +10,8 @@
 const config = require("./config.js");
 
 const pg = require("pg");
-const pokemon = require('./models/pokemon');
-const userModel = require('./models/user');
+// const pokemon = require('./models/pokemon');
+// const userModel = require('./models/user');
 
 const exportPool = new pg.Pool(config.dbSettings);
 
@@ -26,9 +26,13 @@ module.exports = {
 
   //user: user(exportPool),
 
-  singleQuery: async function(queryObj) {
-    let result = await db.pool.query(queryObj);
-    return result.rows;
+  singleQuery: async function(queryObj, values=[]) {
+    try {
+      let result = await exportPool.query(queryObj, values);
+      return result.rows;
+    } catch (error) {
+      console.log(error.stack);
+    }
   },
 
   multiQuery: async function(queryObjectArray) {
