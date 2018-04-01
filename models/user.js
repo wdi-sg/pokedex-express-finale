@@ -32,7 +32,6 @@
  		},
 
  		login: function(userInput,callback){
-
  			let queryText='select * from users where username='+"'"+userInput.username+"'";
  			dbPool.query(queryText,(err,dbRes)=>{
  				if(err){
@@ -45,9 +44,13 @@
  						if(dbRes==false){
  							callback(err,dbRes);
  						}else{
- 							let queryText=('select * from pokemons')
+ 							let queryText='select user_pin_pokemon.pokemon_id as id, pokemons.name as name, pokemons.img as img from users inner join user_pin_pokemon on users.id=user_pin_pokemon.user_id inner join pokemons on pokemons.id =user_pin_pokemon.pokemon_id AND users.username='+"'"+userInput.username+"'";
  							dbPool.query(queryText,(err,dbRes)=>{
- 								callback(err,dbRes);
+ 								let pinnedPokemons=dbRes.rows;
+ 								queryText='select * from pokemons'
+ 								dbPool.query(queryText,(err,dbRes)=>{
+ 									callback(err,dbRes,pinnedPokemons);
+ 								})
  							});	
  						}
  					});	

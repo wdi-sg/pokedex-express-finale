@@ -16,10 +16,12 @@ module.exports = function (app,db) {
 	app.get('/users/new',userController.getNewUserForm);
 	app.post('/users/new',userController.submitNewUserForm);
 	app.post('/users/login',userController.login);
+	app.get('/users/login',userController.login);
 	app.get('/users/logout',userController.logout);
 
 	app.post('/pokemon/new',pokemonController.newPokemon);
 	app.post('/pokemon/pin',pokemonController.pinPokemon);
+	app.delete('/pokemon/pin/remove',pokemonController.unPinPokemon);
 
 
 };

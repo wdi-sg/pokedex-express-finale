@@ -28,6 +28,16 @@ module.exports = function(db){
 				}
 				sRes.send({status:'added',id:sReq.body.pokemonId});
 			});
+		},
+
+		unPinPokemon: function(sReq,sRes){
+			db.pokemonModel.unPinPokemon(sReq,(err,dbRes)=>{
+				if(err){
+					console.log(err.message);
+				}
+				sRes.send({status:'deleted',id:sReq.body.pokemonId});
+			});
+
 		}
 	}
 };

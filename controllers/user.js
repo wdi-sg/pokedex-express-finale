@@ -23,14 +23,14 @@ module.exports=function(db){
 
 		submitNewUserForm: function(sReq,sRes){
 			db.userModel.newUserEntry(sReq.body,(err,dbRes)=>{
-				sRes.send('Submitted');
+				sRes.redirect('/users/login');
 			})
 		},
 
 		login: function(sReq,sRes){
-			db.userModel.login(sReq.body,(err,dbRes)=>{
+			db.userModel.login(sReq.body,(err,dbRes,pinnedPokemons)=>{
 				if(err){
-					console.log(err.message);
+					console.log("here",err.message);
 				}else if (dbRes==false){
 					sRes.redirect('/?error=invalidpassword');
 				}else if(dbRes.rows.length==0){
@@ -39,6 +39,10 @@ module.exports=function(db){
 					let context = {
 						pokemon: dbRes.rows,
 						username: sReq.body.username
+					}
+					if(pinnedPokemons.length !=0){
+						context.pinnedPokemonsTrue=true,
+						context.pinnedPokemons=pinnedPokemons
 					}
 					sRes.cookie('loggedin',true);
 					sRes.cookie('username',sReq.body.username);

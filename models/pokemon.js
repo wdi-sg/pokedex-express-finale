@@ -44,6 +44,13 @@ module.exports = function(dbPool){
  					});
  				}
  			})
+ 		},
+
+ 		unPinPokemon: (sReq,callback)=>{
+ 			let queryText='delete from user_pin_pokemon where pokemon_id='+"'"+parseInt(sReq.body.pokemonId)+"'"+'and user_id=';
+ 			dbPool.query(queryText,(err,dbRes)=>{
+ 				callback(err,dbRes);
+ 			})
  		}
  	}
 }

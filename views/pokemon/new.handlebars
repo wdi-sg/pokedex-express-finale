@@ -11,7 +11,7 @@
 	<input type="submit" value="Log Out">
 </form>
 
-<form method="POST" action="/pokemon/new">
+{{!-- <form method="POST" action="/pokemon/new">
 	Num: <input type="text" name="num">
 	Name: <input type="text" name="name">
 	Img: <input type="text" name="img">
@@ -20,7 +20,21 @@
 	<input type="submit" value="Create Pokemon">
 </form>
 <br>
+<br> --}}
+{{#if pinnedPokemonsTrue}}
+	<div class="container">
+		<div class="row">
+			{{#each pinnedPokemons}}
+			<div class="border d-flex flex-column align-items-center pokemon_container" id="pinnedPokemonBox{{this.id}}">
+				<p class="p-2 pokemon_name">{{this.name}} <span class="pin" id={{this.id}} data-status="added">unPin</span></p>
+				<img class="p-2 pokemon_img" src="{{this.img}}">
+			</div>
+			{{/each}}	
+		</div>
+	</div>
+{{/if}}
 <br>
+
 <div class="container">
 	<div class="row">
 		{{#each pokemon}}
