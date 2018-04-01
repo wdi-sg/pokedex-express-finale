@@ -1,0 +1,14 @@
+<h1>Edit Pokemon Form</h1>
+<form action="/pokemons/{{pokemon.id}}?_method=put" method="post">
+    <input type="hidden" name="id" value="{{pokemon.id}}">
+    <input type="hidden" name="num" value="{{pokemon.num}}">
+    <label for="name">Name: </label><input type="text" name="name" value="{{pokemon.name}}"><br>
+    <label for="img">Image URL: </label><input type="text" name="img" value="{{pokemon.img}}"><br>
+    <label for="weight">Weight: </label><input type="text" name="weight" value="{{pokemon.weight}}"><br>
+    <label for="height">Height: </label><input type="text" name="height" value="{{pokemon.height}}"><br>
+    <input type="submit" value="Submit">
+</form>
+<form action="/pokemons/{{pokemon.id}}?_method=delete" method="post">
+    <input type="hidden" name="id" value="{{pokemon.id}}">
+    <input type="submit" value="Delete">
+</form>
