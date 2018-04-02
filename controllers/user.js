@@ -13,9 +13,65 @@
  * Controller logic
  * ===========================================
  */
+module.exports=function(db){
+
+	return {
+
+		getNewUserForm: function (sReq,sRes) {
+			sRes.render('user/new');
+		},
+
+		submitNewUserForm: function(sReq,sRes){
+			db.userModel.newUserEntry(sReq.body,(err,dbRes)=>{
+				sRes.redirect('/users/login');
+			})
+		},
+
+		login: function(sReq,sRes){
+			db.userModel.login(sReq.body,(err,dbRes,pinnedPokemons)=>{
+				if(err){
+					console.log("here",err.message);
+				}else if (dbRes==false){
+					sRes.redirect('/?error=invalidpassword');
+				}else if(dbRes.rows.length==0){
+					sRes.redirect('/?error=noUser')
+				}else{
+					let context = {
+						pokemon: dbRes.rows,
+						username: sReq.body.username
+					}
+					if(pinnedPokemons.length !=0){
+						context.pinnedPokemonsTrue=true,
+						context.pinnedPokemons=pinnedPokemons
+					}
+					sRes.cookie('loggedin',true);
+					sRes.cookie('username',sReq.body.username);
+					sRes.render('pokemon/new',context);
+				}
+			});
+		},
+
+		logout: function(sReq,sRes){
+			sRes.clearCookie('loggedin');
+			sRes.clearCookie('username');
+			sRes.redirect('/');
+		}
+
+	};
+
+};
+
+
 
 /**
  * ===========================================
  * Export controller functions as a module
  * ===========================================
  */
+
+// module.exports = function(db){
+// 	return{
+// 		getNewUserForm:getNewUserForm,
+// 		submitNewUserForm:submitNewUserForm
+// 	}
+// };

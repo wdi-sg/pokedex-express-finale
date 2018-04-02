@@ -1,0 +1,18 @@
+body{
+	background-color: #48c6ef;
+}
+
+
+.pokemon_container{
+	width: 150px;
+}
+
+.pokemon_name{
+	text-align: center;
+}
+
+.pokemon_img {
+   width:100px;
+   height:100px;
+   object-fit:scale-down;
+}
