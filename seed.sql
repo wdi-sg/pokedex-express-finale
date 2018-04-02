@@ -1,3 +1,4 @@
+\c pokemons_development
 -- populate table with seed data (all pokemon in pokedex)
 
 INSERT INTO pokemons

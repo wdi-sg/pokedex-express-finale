@@ -1,0 +1,10 @@
+<h1>Welcome back to the online Pokedex{{#if loggedIn }}, {{username}}{{/if}}!</h1>
+{{#if loggedIn}}
+<form action="/users/logout" method="POST">
+    <input type="submit" value="Logout" name="logout">
+    <br>
+    <br>
+</form>
+{{/if}} {{#each pokemon}}
+<li>{{this.name}}</li>
+{{/each}}
