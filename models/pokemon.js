@@ -14,3 +14,14 @@
  * Export model functions as a module
  * ===========================================
  */
+module.exports = (dbPool) => {
+    return {
+        get: (id, callback) => {
+            const queryString = 'SELECT * from pokemons where id=$1'
+            const value = [id];
+            dbPool.query(queryString, values, (error, queryResult) => {
+                callback(error, queryResult);
+            });
+        }
+    };
+};
