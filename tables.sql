@@ -1,4 +1,6 @@
 -- create pokemons table
+DROP TABLE IF EXISTS pokemons;
+
 CREATE TABLE IF NOT EXISTS pokemons (
   id SERIAL PRIMARY KEY,
   num varchar(255),
@@ -9,6 +11,8 @@ CREATE TABLE IF NOT EXISTS pokemons (
 );
 
 -- create users table
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   name varchar(255),
