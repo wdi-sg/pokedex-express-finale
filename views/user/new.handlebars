@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Account</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form class="userForm" method="POST" action="/user">
+        <div class="userAttribute">
+            name: <input name="name" type="name"/>
+        </div>
+        <div class="userAttribute">
+            email: <input name="email" type="email" />
+        </div>
+        {{#if duplicateEmail}}
+        <p class="errorMessage">This email is already taken.</p>
+        {{/if}}
+        <div class="userAttribute">
+            password: <input name="password" type="password" />
+        </div>
+        <input name="submit" type="submit" />
+    </form>
+</body>
+</html>

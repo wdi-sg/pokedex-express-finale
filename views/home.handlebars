@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokedex</title>
+</head>
+<body>
+    <h1>Welcome to the Online Pokedex</h1>
+    {{#if loggedIn}}
+        <form method="POST" action="/user/logout">
+            <button class="homeButton" type="submit">Logout</button>
+        </form>
+    {{else}}
+        <form method="GET" action="/user/new">
+            <button class="homeButton" type="submit">Register</button>
+        </form>
+        <form method="GET" action="/user/login">
+            <button class="homeButton" type="submit">Login</button>
+        </form>
+    {{/if}}
+
+    {{#each pokemon}}
+        <li>{{this.name}}</li>
+    {{/each}}
+</body>
+</html>
