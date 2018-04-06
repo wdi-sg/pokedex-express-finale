@@ -1,0 +1,103 @@
+
+<div class="page-header">
+  <div class="container">
+    <h3 class="sub-title"> Create crypto price alerts for Mominder to monitor</h3>
+  </div>
+</div>
+
+<section class="section section-search red lighten-5 center">
+  <div class="container">
+    <div id="reduce-margin-bottom" class="row">
+      <div class="col s12">
+        <h5>Search Tickers</h5>
+        <div class="input-field">
+          <input class="white grey-text autocomplete" placeholder="BTCUSDT, ETHBTC, etc.." type="text" id="autocomplete-input">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container" id="priceData">
+    <div class="ticker-box">
+      <div class="label-black">
+        Symbol
+      </div>
+      <div id="symbol-value" class="label-white">
+        -
+      </div>
+    </div>
+    <div class="ticker-box">
+      <div class="label-black">
+        Price
+      </div>
+      <div id="price-value" class="label-white">
+        -
+      </div>
+    </div>
+    <div class="ticker-box">
+      <div class="label-black">
+        % Change
+      </div>
+      <div id="change-value" class="label-white">
+        -
+      </div>
+    </div>
+    <div class="ticker-box">
+      <div class="label-black">
+        24H
+      </div>
+      <div id="24h-value" class="label-white">
+        -
+      </div>
+    </div>
+    <div class="ticker-box">
+      <div class="label-black">
+        24L
+      </div>
+      <div id="24l-value" class="label-white">
+        -
+      </div>
+    </div>
+    <div class="ticker-box">
+      <div class="label-black">
+        Change
+      </div>
+      <div id="abschange-value" class="label-white">
+        -
+      </div>
+    </div>
+  </div>
+</section>
+<form class="" action="index.html" method="post">
+  <div class="container">
+
+
+  <div class="row">
+    <div class="input-field">
+      <input id="name" type="text" name="name" value="" required>
+      <label for="name">Title</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field">
+      <input id="name" type="text" name="name" value="" required>
+      <label for="name">Title</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <label for="date-field">Date</label>
+      <input id="date-field" type="text" class="datepicker" name="date" required>
+    </div>
+
+    <div class="input-field col s6">
+      <label for="time-field">Time</label>
+      <input id="time-field" type="text" class="timepicker" name="time" required>
+    </div>
+  </div>
+  </div>
+</form>
+
+<script type="text/javascript" src="/js/crypto.js"></script>

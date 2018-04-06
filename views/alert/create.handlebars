@@ -1,0 +1,47 @@
+
+<div class="page-header">
+  <div class="container">
+    <h3 class="sub-title"> Create alerts for Mominder to nag at you</h3>
+  </div>
+</div>
+
+<div class="container">
+  <form id="createForm" class="" action="/alerts/create" method="post">
+    <div class="row">
+      <div class="input-field">
+        <input id="name" type="text" name="name" value="" required>
+        <label for="name">Title</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <label id="textlablel1" for="textarea1">Message</label>
+        <textarea id="textarea1" class="materialize-textarea" form="createForm" name="description" type="text" required></textarea>
+        <span class="helper-text" data-error="wrong" data-success="right">Message for Mominder to remind your future self</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <label for="date-field">Date</label>
+        <input id="date-field" type="text" class="datepicker" name="date" required>
+      </div>
+
+      <div class="input-field col s6">
+        <label for="time-field">Time</label>
+        <input id="time-field" type="text" class="timepicker" name="time" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <button class="red lighten-2 waves-effect waves-light btn" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<script type="text/javascript" src="/js/forms.js"></script>
