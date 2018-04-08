@@ -1,0 +1,46 @@
+
+<div class="page-header">
+  <div class="container">
+    <h3 class="sub-title"> {{alert.name}}</h3>
+  </div>
+</div>
+
+<div class="container alert">
+  <div class="timer">
+    <div class="timer-main">
+      <div class="timer-box">
+        <p id="days">150</p>
+        days
+      </div>
+      <div class="timer-box">
+        <p id="hours">40</p>
+        hours
+      </div>
+      <div class="timer-box">
+        <p id="minutes">22</p>
+        minutes
+      </div>
+      <div class="timer-box">
+        <p id="seconds">23</p>
+        seconds
+      </div>
+    </div>
+  </div>
+
+  <p id="tagline">before Mominder nags</p>
+  <h3>{{alert.description}}</h3>
+  <small>on</small>
+  <p>{{alert.display_time}}</p>
+
+  <div id="alert_time" class="">
+    {{alert.alert_time}}
+  </div>
+  <a class="btn red lighten-2 waves-effect waves-light" href="/alerts/edit/{{alert.id}}">EDIT</a>
+
+  <form class="inline-form" action="/alerts/delete/{{alert.id}}?_method=DELETE" method="post">
+    <button class="red lighten-2 waves-effect waves-light btn" type="submit" name="action">DELETE
+    </button>
+  </form>
+</div>
+
+<script type="text/javascript" src="/js/test.js"></script>

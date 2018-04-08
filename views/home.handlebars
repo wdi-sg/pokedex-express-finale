@@ -1,0 +1,32 @@
+{{#if isAuthenticated}}
+<div class="page-header">
+  <div class="container">
+    <h3 class="sub-title">Tasks for Mominder</h3>
+  </div>
+</div>
+
+<div class="container">
+  {{#each alerts}}
+  <a href="/alerts/{{this.id}}">
+  <div class="row tasks">
+    <div class="row col s12 flex">
+      <p class="task-name">
+        {{this.name}}
+      </p>
+      <p class="move-right">
+        {{this.display_time}}
+      </p>
+    </div>
+    <div class="row col s12 message-box">
+      {{this.description}}
+    </div>
+  </div>
+  </a>
+  {{/each}}
+</div>
+{{else}}
+<div class="bg"><div id="main-text">
+  <h4>A no frills <span id="blue">reminder app</span> that works with Telegram</h4>
+  <p><br></p>
+</div></div>
+{{/if}}

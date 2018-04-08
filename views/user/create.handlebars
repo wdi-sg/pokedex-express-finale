@@ -1,0 +1,33 @@
+<script type="text/javascript" src="/js/userForm.js"></script>
+<div class="page-header">
+  <div class="container">
+    <h3 class="sub-title">Create User</h3>
+  </div>
+</div>
+<div class="container">
+  <form class="" action="/users/create" method="POST">
+
+    <div class="input-field">
+      <input required type="text" name="name" value="{{user.name}}" autofocus>
+      <label for="Name">Name</label>
+    </div>
+    <div class="input-field">
+      <input required type="email" name="email" value="{{user.email}}" onblur="checkEmail(value)">
+      <label for="Email">Email</label>
+      <span id="helper-email" class="helper-text" data-error="wrong" data-success="right"></span>
+    </div>
+    <div class="input-field">
+      <input type="password" name="password" required minlength="4">
+      <label for="Password">Password</label>
+    </div>
+    <div class="input-field">
+      <input type="password" name="password2" required minlength="4">
+      <label for="password2">Confirm Password</label>
+    </div>
+    <div class="input-field">
+      <button id="submit-btn" class="red lighten-2 waves-effect waves-light btn" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
+</div>

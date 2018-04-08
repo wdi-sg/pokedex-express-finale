@@ -1,0 +1,295 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  flex: 0 0 auto;
+}
+
+.bg {
+    flex: 1;
+    /* The image used */
+    background-image: url("/img/backdrop.jpg");
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    opacity: 0.7;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-text {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  max-width: 600px;
+}
+
+#blue {
+  color: #0091ea;
+}
+
+.inline-form {
+  display: inline;
+}
+
+.page-header {
+  /* background-color: #ffebee; */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.sub-title {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.materialize-textarea {
+  margin-bottom: 0 !important;
+}
+
+code {
+  font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+  color: #52595d;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  padding: 0px 3px;
+  display: inline-block;
+}
+
+.telegram-steps {
+  line-height: 1.6;
+  padding-left: 20px;
+}
+
+.telegram-steps li {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.round-img {
+  border-radius: 50%;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.8rem;
+}
+
+figure {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav__overwrite {
+  position: inherit !important;
+  float: none !important;
+}
+
+.tasks {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  padding: 0.2rem 0.2rem 0.8rem 0.2rem;
+  border-bottom: 1px solid #ef5350;
+  background-color: #ffcdd2;
+  margin-bottom: 0px
+}
+
+body {
+  background-color: #ffebee;
+  font-family: 'Raleway', Helvetica, Arial, sans-serif;
+}
+
+.tasks:hover {
+  background-color: #ef9a9a;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.move-right {
+  margin-left: auto;
+  font-size: 14px;
+}
+
+.task-name {
+  font-weight: 600;
+  font-family: Helvetica;
+}
+
+.flex p {
+  margin-top: 5px;
+}
+
+.message-box {
+  padding-left: 18px !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.timer {
+  display: flex;
+  justify-content: center;
+}
+.timer-main {
+  display: flex;
+  text-align: center;
+}
+
+.timer-box {
+  margin: 3px;
+  border: 2px solid white;
+  width: 80px;
+  color: white;
+  background-color: #e53935;
+}
+
+.timer-box p {
+  font-size: 2rem;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+}
+
+.alert {
+  text-align: center;
+}
+
+#tagline {
+  margin-top: 1px;
+}
+
+#alert_time {
+  display: none;
+}
+
+.input-field input[type=email] {
+  margin-bottom: 2px !important;
+  text-transform: lowercase;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #b71c1c !important;
+}
+.input-field input[type=password]:focus + label {
+  color: #b71c1c !important;
+}
+.input-field input[type=email]:focus + label {
+  color: #b71c1c !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #b71c1c !important;
+  box-shadow: 0 1px 0 0 #b71c1c !important;
+}
+.input-field input[type=password]:focus {
+  border-bottom: 1px solid #b71c1c !important;
+  box-shadow: 0 1px 0 0 #b71c1c !important;
+}
+.input-field input[type=email]:focus {
+  border-bottom: 1px solid #b71c1c !important;
+  box-shadow: 0 1px 0 0 #b71c1c !important;
+}
+
+.input-field label[id=textlablel1]:focus {
+  color: #b71c1c !important;
+}
+.input-field textarea[id=textarea1]:focus {
+  border-bottom: 1px solid #b71c1c !important;
+  box-shadow: 0 1px 0 0 #b71c1c !important;
+}
+
+.datepicker-date-display, .datepicker-table td.is-selected {
+  background-color: #e57373;
+  /* #26a69a */
+}
+
+.datepicker-table td.is-today {
+  color: #01579b;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+  color: #e57373;
+}
+
+.alerts_error, .alerts_success {
+  display: none;
+}
+
+#helper-email {
+  font-size: 65% !important;
+  font-style: italic;
+}
+
+/*  SEARCH TEST AREA */
+.section-search input {
+  padding: 5px !important;
+  font-size: 18px !important;
+  width: 90% !important;
+  border: #f4f4f4 3px solid !important;
+}
+
+.autocomplete-content {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+#autocomplete-input:focus {
+  border: 1px solid #b71c1c !important;
+  box-shadow: 0 1px 0 0 #b71c1c !important;
+}
+
+#priceData {
+  font-size: 0;
+  text-align: center;
+}
+
+.ticker-box {
+  display: inline-block;
+  min-width: 120px;
+  margin: 0px;
+  font-size: 1rem;
+}
+
+.label-black {
+  color: white;
+  background-color: black;
+  font-size: 1rem;
+}
+
+.label-white {
+  color: black;
+  /* background-color: white; */
+  font-size: 1rem;
+}
+
+#reduce-margin-bottom {
+  margin-bottom: 0px;
+}
