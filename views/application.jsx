@@ -6,6 +6,9 @@ const Home = require('./home')
 const NewUser = require('./user/new')
 const Login = require('./user/login')
 
+const NewSong = require('./song/new')
+const SongIndex = require('./song/index')
+const EditSong = require('./song/edit')
 
 class Application extends React.Component {
   render() {
@@ -22,6 +25,15 @@ class Application extends React.Component {
       case 'login':
         var currentPage = <Login/>
         break;
+      case 'newSong':
+        var currentPage = <NewSong userId={this.props.userId} />
+        break;
+      case 'songIndex':
+        var currentPage = <SongIndex songs={this.props.songs} />
+        break;
+      case 'editSong':
+        var currentPage = <EditSong userId={this.props.userId} song={this.props.song} />
+        break;
     }
 
     return(
@@ -31,7 +43,7 @@ class Application extends React.Component {
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous" />
         </head>
         <body>
-          <Nav/>
+          <Nav userLogin={this.props.userLogin}/>
           {currentPage}
         </body>
       </html>

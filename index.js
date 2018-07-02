@@ -37,15 +37,17 @@ app.set('view engine', 'jsx');
 
 // Root GET request (it doesn't belong in any controller file)
 app.get('/', (req, res) => {
-  console.log(req.cookies);
-  res.render('application', {page: 'home'});
+  console.log(req.cookies['loginCookie']);
+  res.render('application', {page: 'home', userLogin: req.cookies['loginCookie']});
 })
 
-// Catch all unmatched requests and return 404 not found page
-// require('./routes.js')(app, db);
 const myRoutes = require('./routes.js');
 myRoutes(app, db);
 
+
+app.get('*', (req, res) => {
+  res.render('404');
+})
 /**
  * ===================================
  * Listen to requests on port 3000
@@ -56,7 +58,8 @@ const server = app.listen(3000, () => console.log('~~~ Tuning in to the waves of
 // Run clean up actions when server shuts down
 server.on('close', () => {
   console.log('Closed express server');
-
   // close database connection pool
-
+  db.pool.end(() => {
+    console.log('Shut down db connection pool');
+  });
 });

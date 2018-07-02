@@ -1,6 +1,6 @@
 module.exports = (app, db) => {
   const user = require('./controllers/users.js')(db);
-  const artist = require('./controllers/artists.js')(db);
+  const song = require('./controllers/songs.js')(db);
 
   // ~~~ ~~~ ~~~ ~~~ ~~~ ~~~
   //          USER
@@ -14,5 +14,10 @@ module.exports = (app, db) => {
   // ~~~ ~~~ ~~~ ~~~ ~~~ ~~~
   //         SONGS
   // ~~~ ~~~ ~~~ ~~~ ~~~ ~~~
-
+  app.get('/songs', song.songs);
+  app.get('/songs/new', song.newSong);
+  app.post('/songs/new', song.createSong);
+  app.get('/songs/:id/edit', song.editSong);
+  app.put('/songs/:id/edit', song.updateSong);
+  app.delete('/songs/:id/delete', song.deleteSong);
 };

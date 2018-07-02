@@ -10,21 +10,31 @@ class Nav extends React.Component {
         <li className="nav-item">
           <a className="nav-link" href="/">Home</a>
         </li>
+
+        {userIsLoggedIn == undefined &&
         <li className="nav-item">
           <a className="nav-link" href="/users/new">Register</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/users/login">Log In</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/users/logout">Log Out</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/artists">Artist Index</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/artists/new">New Artist</a>
-        </li>
+        </li>}
+
+        {userIsLoggedIn == undefined &&
+          <li className="nav-item">
+            <a className="nav-link" href="/users/login">Log In</a>
+          </li>}
+
+        {userIsLoggedIn != undefined &&
+          <li className="nav-item">
+            <a className="nav-link" href="/songs/new">New Song</a>
+          </li>}
+
+        {userIsLoggedIn != undefined &&
+          <li className="nav-item">
+            <a className="nav-link" href="/songs">All Songs</a>
+          </li>}
+
+        {userIsLoggedIn != undefined &&
+          <li className="nav-item">
+            <a className="nav-link" href="/users/logout">Log Out</a>
+          </li>}
       </ul>
     )
   }

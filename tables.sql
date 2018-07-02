@@ -1,10 +1,10 @@
 -- create songs table
+-- DROP TABLE songs;
 CREATE TABLE IF NOT EXISTS songs (
   id SERIAL PRIMARY KEY,
   title varchar(255),
   duration varchar(255),
-  album_id integer,
-  artist_id integer
+  user_id integer
 );
 
 -- create users table
