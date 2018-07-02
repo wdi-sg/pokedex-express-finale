@@ -1,5 +1,5 @@
--- create pokemons table
-CREATE TABLE IF NOT EXISTS pokemons (
+-- create Pokemon table in database
+CREATE TABLE IF NOT EXISTS pokemon (
   id SERIAL PRIMARY KEY,
   num varchar(255),
   name varchar(255),
@@ -8,10 +8,14 @@ CREATE TABLE IF NOT EXISTS pokemons (
   height varchar(255)
 );
 
--- create users table
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  name varchar(255),
-  email varchar(255),
-  password varchar(255)
+  username varchar(255),
+  password_hash varchar(255)
+);
+
+CREATE TABLE IF NOT EXISTS user_pokemon (
+  id SERIAL PRIMARY KEY,
+  username_id INTEGER,
+  pokemon_id INTEGER
 );

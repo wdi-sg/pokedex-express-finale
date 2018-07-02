@@ -1,33 +1,26 @@
-/**
- * User model functions.
- *
- * Any time a database SQL query needs to be executed
- * relating to a user (be it C, R, U, D, or Login),
- * one or more of the functions here should be called.
- *
- * NOTE: You can add authentication logic in this model.
- *
- * Export all functions as a module using `module.exports`,
- * to be imported (using `require(...)`) in `db.js`.
- */
+let createUserModel = db => {
+    class User {
 
-/**
- * ===========================================
- * Export model functions as a module
- * ===========================================
- */
+        constructor(id, username, passwordHash) {
+            this.id = id;
+            this.username = username;
+            this.passwordHash = passwordHash;
+        }
 
-module.exports = function(db){
+        static create(userInfo, errorCallback, successCallback) {
+            let queryText = 'INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING *';
+            let values = [userInfo.username, userInfo.passwordHash];
+            db.query(queryText, values, (err, res) => {
+                if (err) {
+                    errorCallback(err);
+                } else {
+                    successCallback(res.rows[0].id);
+                }
+            })
+        }
+    }
 
+    return User;
+}
 
-    let example = function(email, password_hash, callback){
-        let queryText = 'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *';
-
-        const values = [email, password_hash];
-        db.query(queryText, values, callback);
-    };
-
-    return {
-        example : example
-    };
-};
+module.exports = createUserModel;
