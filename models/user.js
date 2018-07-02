@@ -18,16 +18,29 @@
  */
 
 module.exports = function(db){
+	//`db` is accessible within this function scope
+	return {
+		userCreate: (email, password_hash, callback) => {
+			// set up query
+			let queryString = 'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *';
 
+			const values = [email, password_hash];
 
-    let example = function(email, password_hash, callback){
-        let queryText = 'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *';
+			// console.log(db);
 
-        const values = [email, password_hash];
-        db.query(queryText, values, callback);
-    };
+			// execute query
+			db.query(queryString, values, callback);
+		},
 
-    return {
-        example : example
+		checkLogin: (email, callback) => {
+
+			let queryString = 'SELECT * FROM users WHERE email = $1';
+
+			const values = [email];
+
+			db.query(queryString, values, callback);
+
+		}
+
     };
 };
