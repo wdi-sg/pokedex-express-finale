@@ -1,38 +1,31 @@
-/**
- * User controller functions.
- *
- * Each user-related route in `routes.js` will call
- * one controller function here.
- *
- * Export all functions as a module using `module.exports`,
- * to be imported (using `require(...)`) in `routes.js`.
- */
+let createControllers = db => {
+    const User = require("../models/user")(db);
+    const sha256 = require('js-sha256');
 
-/**
- * ===========================================
- * Controller logic
- * ===========================================
- */
+    return {
+        showCreationForm: (request, response) => {
+            response.render('newuserform');
+        },
 
-/**
- * ===========================================
- * Export controller functions as a module
- * ===========================================
- */
-
-module.exports = function(db){
-
-  /**
-   * ===========================================
-   * Controller logic
-   * ===========================================
-   */
-  const get = (request, response) => {
-    // make a query for a user and return that user data
-    response.send("WEIRD");
-  };
-
-  return {
-    get: get
-  };
+        userCreate: (request, response) => {
+            let userInfo = {
+                username: request.body.username,
+                password: request.body.password,
+                passwordHash: sha256(password)
+            };
+            let errorCallback = (err) => {
+                console.log("Error creating user:", err);
+                response.status(401);
+            }
+            let successCallback = (createdUserId) => {
+                response.cookie('logged_in', 'true');
+                response.cookie('user_id', createdUserId);
+                request.flash('success', 'Successfully created account.');
+                response.redirect('/');
+            }
+            User.create(userInfo, errorCallback, successCallback);
+        }
+    }
 }
+
+module.exports = createControllers;
