@@ -8,6 +8,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
+const sha256 = require('js-sha256');
 const db = require('./db');
 
 /**
@@ -27,7 +28,9 @@ app.use(cookieParser());
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
-
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', reactEngine);
 
 
 

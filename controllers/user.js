@@ -14,25 +14,105 @@
  * ===========================================
  */
 
+
 /**
  * ===========================================
  * Export controller functions as a module
  * ===========================================
  */
 
+const sha256 = require('js-sha256');
+
 module.exports = function(db){
 
-  /**
-   * ===========================================
-   * Controller logic
-   * ===========================================
-   */
-  const get = (request, response) => {
-    // make a query for a user and return that user data
-    response.send("WEIRD");
-  };
+    /**
+     * ===========================================
+     * Controller logic
+     * ===========================================
+     */
 
-  return {
-    get: get
-  };
+    const newUser = (req, res) => {
+        let password = sha256(req.body.password);
+        let queryText = 'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *';
+        const values = [req.body.email, password];
+        pool.query(queryText, values, (err, result) => {
+            if (err) {
+                res.send('db error: ' + err.message)
+            } else {
+                let user_id = result.rows[0].id;
+                res.cookie('logged_in', 'true');
+                res.cookie('user_id', user_id);
+                res.send('created new user: ' + user_id)
+            }
+
+        });
+    };
+
+    const loginPage = (req, res) => {
+        res.render('password_home');
+    };
+
+    const signUp = (req, res) => {
+        res.render('password_registration')
+    }
+
+    const loginCheck = (req, res) => {
+        let queryText = 'SELECT password, id FROM users WHERE email = $1';
+        const enterPassHash = sha256(req.body.password);
+        const values = [req.body.email];
+        pool.query(queryText, values, (err, queryResult) => {
+            if (err) {
+                res.send('deb error: ' + err.message);
+            } else {
+                // console.log('this is the row', queryResult.rows[0])
+                // console.log('this is the length', queryResult.rows.length)
+                if (queryResult.rows.length > 0) {
+                    if (enterPassHash === queryResult.rows[0].password) {
+                        let user_id = queryResult.rows[0].id;
+                        res.cookie('logged_in', 'true');
+                        res.cookie('user_id', user_id);
+                        res.redirect('/pokemon');
+                    } else {
+                        res.redirect('/');
+                    }
+                }
+            }
+        })
+    }
+
+    const addPokemon2User = (req, res) => {
+        let queryText = 'INSERT INTO pokemon_user (pokemon_id, user_id) VALUES ($1, $2) RETURNING *'
+        const values = [req.params.id, req.cookies['user_id']]
+        pool.query(queryText, values, (err, queryResult) => {
+            if (err) {
+                res.send('deb error: ' + err.message);
+            } else {
+                res.redirect('/pokemon')
+            }
+
+        })
+    }
+
+    const displayUserPokemon = (req, res) => {
+        let user_id = req.cookies['user_id'];
+        let queryText = 'SELECT * FROM pokemon_user JOIN pokemon ON pokemon.id = pokemon_user.pokemon_id WHERE user_id=' + user_id
+        pool.query(queryText, (err, queryResult) => {
+            if (err) {
+                res.send('deb error: ' + err.message);
+            } else {
+                // console.log(queryResult.rows[0].id)
+                console.log(queryResult.rows)
+                res.render('mypokelist', { pokemon: queryResult.rows })
+            }
+        })
+    }
+
+    return {
+        newUser: newUser,
+        loginPage: loginPage,
+        signUp: signUp,
+        loginCheck: loginCheck,
+        addPokemon2User: addPokemon2User,
+        displayUserPokemon: displayUserPokemon
+    };
 }
