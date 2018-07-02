@@ -4,12 +4,12 @@ This is it. We've learned a lot in the past two weeks:
 
 * How to create a web server using Node.js and the `express` package
 * How to read/write to a JSON file using `jsonfile` package
-* How to render HTML template files using Handlebars (`express-handlebars` package)
+* How to render HTML template files using React (`express-react-views` package)
 * How to read incoming data from web forms using `body-parser` package
 * How to override methods using `method-override` package to workaround the limitation of `<form>` HTML not having support for PUT and DELETE requests
 * How to add and delete cookies to/from the browser using `cookie-parser`
 * How to use Postgres database (`pg` package) to replace `jsonfile` for read/write of data
-* How to do user authentication using a combination of `bcrypt` to hash plain text passwords and storing cookies on the browser
+* How to do user authentication using a combination of `SHA256` to hash plain text passwords and storing cookies on the browser
 
 That's a lot of new information! To help us digest the information, we will do one final exercise, which is the culmination of all previous `pokedex-express` exercises.
 
@@ -18,7 +18,7 @@ In this exercise, we will build a full stack Pokedex web app with user authentic
 ## Getting Started
 
 1.  Fork and clone this repository to your computer
-2.  Run `yarn install` to install dependencies
+2.  Run `npm install` to install dependencies
 3.  Create a new Postgres database by running `createdb pokemons_development -U <your_username>`
 4.  Run `psql -U <your_username> -d pokemons_development -a -f tables.sql` - this will create 2 new tables for you - a `pokemons` table and `users` table in the database
 5.  Seed pokedex data into the newly created `pokemons` table by running `psql -U <your_username> -d pokemons -a -f seed.sql`
@@ -27,7 +27,7 @@ In this exercise, we will build a full stack Pokedex web app with user authentic
 
 ## Deliverables
 
-Use the structure we have already seen in the previous MVC exercise, write the logic for implementing the app in small steps.
+Use the structure we have already seen in the MVC exercise, write the logic for implementing the app in small steps.
 
 * Start with creating a new User. Don’t worry about hashing password until you know that the app works
 * GET `/users/new` in `routes.js`
