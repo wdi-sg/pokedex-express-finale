@@ -14,10 +14,13 @@ const pg = require('pg');
  });
 
  const userModel = require('./models/user');
+ const artistModel = require('./models/artist');
 
  const userObj = userModel(poolObj);
+ const artistObj = artistModel(poolObj);
 
  module.exports = {
      user: userObj,
+     artist: artistObj,
      pool : poolObj
  };

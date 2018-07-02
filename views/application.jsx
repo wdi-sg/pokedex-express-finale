@@ -3,6 +3,8 @@ const Nav = require('./components/nav')
 const Home = require('./home')
 const NewUser = require('./user/new')
 const Login = require('./user/login')
+const Artists = require('./artist/artists')
+const NewArtist = require('./artist/new')
 
 class Application extends React.Component {
   render() {
@@ -18,6 +20,12 @@ class Application extends React.Component {
         break;
       case 'login':
         var currentPage = <Login/>
+        break;
+      case 'artistsIndex':
+        var currentPage = <Artists artists={this.props.artists}/>
+        break;
+      case 'newArtist':
+        var currentPage = <NewArtist/>
         break;
     }
 
