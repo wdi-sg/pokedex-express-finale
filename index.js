@@ -1,9 +1,3 @@
-/**
- * Entry point to Express web server.
- *
- * Import external library modules as needed (eg. body-parser, etc).
- */
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -27,9 +21,9 @@ app.use(cookieParser());
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
-
-
-
+app.engine('jsx', reactEngine);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
 
 /**
  * ===================================
@@ -37,12 +31,20 @@ const reactEngine = require('express-react-views').createEngine();
  * ===================================
  */
 
+
+
 // Import routes to match incoming requests
 
 // Root GET request (it doesn't belong in any controller file)
+app.get('/', (req, res) => {
+  console.log(req.cookies);
+  res.render('application', {page: 'home'});
+})
 
 // Catch all unmatched requests and return 404 not found page
-require('./routes')(app, db);
+// require('./routes.js')(app, db);
+const myRoutes = require('./routes.js');
+myRoutes(app, db);
 
 /**
  * ===================================
