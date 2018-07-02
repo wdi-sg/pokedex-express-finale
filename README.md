@@ -21,7 +21,6 @@ In this exercise, we will build a full stack Pokedex web app with user authentic
 2.  Run `npm install` to install dependencies
 3.  Create a new Postgres database by running `createdb pokemons_development -U <your_username>`
 4.  Run `psql -U <your_username> -d pokemons_development -a -f tables.sql` - this will create 2 new tables for you - a `pokemons` table and `users` table in the database
-5.  Seed pokedex data into the newly created `pokemons` table by running `psql -U <your_username> -d pokemons -a -f seed.sql`
 6.  Look in the starter file called `index.js`, run `nodemon` to start local server on port 3000
 7.  Write back-end code!
 
@@ -85,4 +84,3 @@ Create albums that belong to a user and that contain many songs. Songs only have
 
 #### Further
 Artists have albums and songs.
-

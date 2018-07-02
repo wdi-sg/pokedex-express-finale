@@ -19,3 +19,20 @@
  * Export controller functions as a module
  * ===========================================
  */
+
+module.exports = function(db){
+
+  /**
+   * ===========================================
+   * Controller logic
+   * ===========================================
+   */
+  const get = (request, response) => {
+    // make a query for a user and return that user data
+    response.send("WEIRD");
+  };
+
+  return {
+    get: get
+  };
+}

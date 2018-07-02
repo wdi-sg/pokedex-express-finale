@@ -7,3 +7,10 @@
  * Export as a function using `module.exports`,
  * to be imported (using `require(...)`) in `index.js`.
  */
+
+module.exports = (app, db) => {
+
+  const users = require('./controllers/users.js')(db);
+
+  app.get('/users', users.get );
+};

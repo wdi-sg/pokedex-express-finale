@@ -5,6 +5,10 @@
  */
 
 const express = require('express');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const db = require('./db');
 
 /**
  * ===================================
@@ -16,8 +20,16 @@ const express = require('express');
 const app = express();
 
 // Set up middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.use(cookieParser());
 
-// Set handlebars to be the default view engine
+
+// Set jsx to be the default view engine
+const reactEngine = require('express-react-views').createEngine();
+
+
+
 
 /**
  * ===================================
@@ -30,6 +42,7 @@ const app = express();
 // Root GET request (it doesn't belong in any controller file)
 
 // Catch all unmatched requests and return 404 not found page
+require('./routes')(app, db);
 
 /**
  * ===================================
