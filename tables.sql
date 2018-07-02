@@ -1,11 +1,10 @@
--- create pokemons table
-CREATE TABLE IF NOT EXISTS pokemons (
+-- create songs table
+-- DROP TABLE songs;
+CREATE TABLE IF NOT EXISTS songs (
   id SERIAL PRIMARY KEY,
-  num varchar(255),
-  name varchar(255),
-  img varchar(255),
-  weight varchar(255),
-  height varchar(255)
+  title varchar(255),
+  duration varchar(255),
+  user_id integer
 );
 
 -- create users table
