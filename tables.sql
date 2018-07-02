@@ -1,17 +1,3 @@
--- create artists table
-CREATE TABLE IF NOT EXISTS artists (
-  id SERIAL PRIMARY KEY,
-  name varchar(255)
-);
-
--- create albums table
-CREATE TABLE IF NOT EXISTS albums (
-  id SERIAL PRIMARY KEY,
-  name varchar(255),
-  users_id integer,
-  artist_id integer
-);
-
 -- create songs table
 CREATE TABLE IF NOT EXISTS songs (
   id SERIAL PRIMARY KEY,

@@ -12,9 +12,7 @@ module.exports = (app, db) => {
   app.get('/users/logout', user.logoutUser);
 
   // ~~~ ~~~ ~~~ ~~~ ~~~ ~~~
-  //         ARTISTS
+  //         SONGS
   // ~~~ ~~~ ~~~ ~~~ ~~~ ~~~
-  app.get('/artists', artist.artists);
-  app.get('/artists/new', artist.newArtist);
-  app.post('/artists/new', artist.createArtist);
+
 };
