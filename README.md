@@ -74,3 +74,15 @@ __REST architecture reference__
 
 
 [1]: https://en.wikipedia.org/wiki/Representational_state_transfer
+
+### Bored of Pokemon?
+You can create an alternate app: Spotifer
+
+Users can create songs. Songs have title and duration. (and image if you want)
+
+#### Further
+Create albums that belong to a user and that contain many songs. Songs only have one album.
+
+#### Further
+Artists have albums and songs.
+
