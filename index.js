@@ -27,6 +27,9 @@ app.use(cookieParser());
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', reactEngine);
 
 
 
@@ -36,6 +39,7 @@ const reactEngine = require('express-react-views').createEngine();
  * Routes
  * ===================================
  */
+
 
 // Import routes to match incoming requests
 

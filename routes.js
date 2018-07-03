@@ -9,8 +9,14 @@
  */
 
 module.exports = (app, db) => {
-
-  const users = require('./controllers/users.js')(db);
-
+  const users = require('./controllers/user.js')(db);
   app.get('/users', users.get );
+  app.post('/newuser', users.newuser );
+
+  app.get('/', (req, res) => {
+    res.status(200).render("home")
+  });
+  app.use((req,res) => {
+    res.status(404).render('errorpage')
+  })
 };
