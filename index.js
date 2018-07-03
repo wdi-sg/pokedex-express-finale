@@ -27,9 +27,9 @@ app.use(cookieParser());
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
-
-
-
+app.set('views', __dirname + '/views/pokemon');
+app.set('view engine', 'jsx');
+app.engine('jsx', reactEngine);
 
 /**
  * ===================================
@@ -38,11 +38,11 @@ const reactEngine = require('express-react-views').createEngine();
  */
 
 // Import routes to match incoming requests
-
 // Root GET request (it doesn't belong in any controller file)
 
+
 // Catch all unmatched requests and return 404 not found page
-require('./routes')(app, db);
+require('./routes')(app, db);	//(A)
 
 /**
  * ===================================
