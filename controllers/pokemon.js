@@ -60,6 +60,7 @@ module.exports = function(db) {
     };
 
     const editPokemonForm = (req, res) => {
+        let id = req.params['id'];
         db.pokemon.editPokemonForm(queryString, (err, result) => {
             if (err) {
                 console.error('Query error:', err.stack);
@@ -70,7 +71,8 @@ module.exports = function(db) {
         });
     }
 
-    const updatePokemon = (request, response) => {
+    const updatePokemon = (req, res) => {
+        let id = req.params['id'];
         let pokemon = req.body;
         pool.query(pokemon.num, pokemon.name, pokemon.img, pokemon.height, pokemon.weight, id, (err, result) => {
             if (err) {
@@ -82,11 +84,12 @@ module.exports = function(db) {
         });
     }
 
-    const deletePokemonForm = (request, response) => {
+    const deletePokemonForm = (req, res) => {
         res.send("COMPLETE ME");
     }
 
-    const deletePokemon = (request, response) => {
+    const deletePokemon = (req, res) => {
+        let id = req.params['id'];
         db.pokemon.deletePokemon(queryString, (err, result) => {
             if (err) {
                 console.error('Query error:', err.stack);
