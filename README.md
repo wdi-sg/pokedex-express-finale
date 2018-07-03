@@ -1,86 +1,57 @@
-# Pokedex Express App - Full stack
+# Pokedex Express App (with Postgres SQL)
 
-This is it. We've learned a lot in the past two weeks:
+For this exercise, we'll upgrade from storing pokedex data in a plain JSON file to a fully fledged Postgres database. The end result we want is a CRUD app for pokemon with data saved into a database.
 
-* How to create a web server using Node.js and the `express` package
-* How to read/write to a JSON file using `jsonfile` package
-* How to render HTML template files using React (`express-react-views` package)
-* How to read incoming data from web forms using `body-parser` package
-* How to override methods using `method-override` package to workaround the limitation of `<form>` HTML not having support for PUT and DELETE requests
-* How to add and delete cookies to/from the browser using `cookie-parser`
-* How to use Postgres database (`pg` package) to replace `jsonfile` for read/write of data
-* How to do user authentication using a combination of `SHA256` to hash plain text passwords and storing cookies on the browser
-
-That's a lot of new information! To help us digest the information, we will do one final exercise, which is the culmination of all previous `pokedex-express` exercises.
-
-In this exercise, we will build a full stack Pokedex web app with user authentication (sort of) from scratch.
+This is a clean new app without a `seed.sql` file. So you'll need at least 2 users to make sure that eveything is working correctly.
 
 ## Getting Started
 
 1.  Fork and clone this repository to your computer
 2.  Run `npm install` to install dependencies
-3.  Create a new Postgres database by running `createdb pokemons_development -U <your_username>`
-4.  Run `psql -U <your_username> -d pokemons_development -a -f tables.sql` - this will create 2 new tables for you - a `pokemons` table and `users` table in the database
-6.  Look in the starter file called `index.js`, run `nodemon` to start local server on port 3000
-7.  Write back-end code!
+3.  Create a new Postgres database by running `createdb pokemons -U <your_username>`
+4.  Run `psql -U <your_username> -d pokemons -a -f tables.sql` to create a `pokemon` table in the database
+5.  Look in the starter file called `index.js`, run `nodemon` to start local server on port 3000
+6.  Open `localhost:3000` on your browser and see the home page
 
 ## Deliverables
 
-Use the structure we have already seen in the MVC exercise, write the logic for implementing the app in small steps.
+The deliverable is an app that has CRUD functionality on pokemons that can be associated with users. Some example code from the previous version of the exercise has been provided for you to build on, although you may extend your own code from the previous exercise if you wish to do so.
 
-* Start with creating a new User. Don’t worry about hashing password until you know that the app works
-* GET `/users/new` in `routes.js`
-* Specify the name of the controller method to be called inside `routes.js` (`user.newForm()`)
-* Write the `newForm()` method in the controller file (`controller/user.js`)
-* Run it, make sure it works
-* Write the handlebars file that will be rendered along with the response
-* Specify the name of the model method to be called inside `controller/user.js` (`allModels.userModel.new()`) — the method should take 2 parameters (1st is the request data, 2nd is the callback to be executed when the query has returned the result)
-* Write the `new()` method in the model file (`model/user.js`) — when the query result has returned succesfully, invoke the callback function and pass the result of the query into it
+* DELETE `/pokemon/:id` should delete the entry of the pokemon with the specified ID, and should redirect to the home page `/`
 
-* Repeat the above for all CRUD routes
-* Do the same for Pokemons
+* Create the relevant `tables.sql` file to create the appropriate table for your database
 
+* Create new routes for user-creation
 
-__REST architecture reference__
+* Create new routes for user-login and user-logout
 
-**URL**            | **HTTP Verb** | **Action**
-----------------   | ------------- | ----------
-/pokemons/         | GET           | index     
-/pokemons/new      | GET           | new       
-/pokemons          | POST          | create    
-/pokemons/:id      | GET           | show      
-/pokemons/:id/edit | GET           | edit      
-/pokemons/:id      | PATCH/PUT     | update    
-/pokemons/:id      | DELETE        | destroy   
+* If the currently logged in user creates a pokemon, the pokemon is automatically associated with the currently logged in user
 
-## Further
-
-* Personalise the home page of your app to display information about the logged-in User (eg. name and Pokemons she owns).
-
-* Create a "super user" User account, and allow only User accounts with "super user" access to create new and modify existing Pokemons.
-
-* Use Postgres to make `email` a unique field for Users table, and prevent users from creating a new user account that uses an email that already exists in your database.
-
-## Tips
-
-* Review the [explanation video](https://www.youtube.com/watch?v=yCX7YRFh0qM) to understand the overall flow of a Node + Express + Postgres app.
-
-* Refer to the previous `pokedex-express` exercises as needed. It is perfectly ok to revisit your own code. Developers do it all the time at work!
-
-* Since we will be building this app from scratch, the only dependency added into `package.json` is Express. You should add dependencies (using `yarn add <package_name>`) as you go along building the app.
-
-* __Commit often__! We operate frequently in an erroneous state as developers, so whenever you feel like you have achieved a small milestone, you should make a git commit. It's not uncommon for a developer to need to revert to an older commit because the code written since that last commit just doesn't work, and you want to start afresh from the last saved commit.
-
-
-[1]: https://en.wikipedia.org/wiki/Representational_state_transfer
-
-### Bored of Pokemon?
-You can create an alternate app: Spotifer
-
-Users can create songs. Songs have title and duration. (and image if you want)
+* So, add to the pokemon table a column with the foreign key `user_id` that refers to the id column in the user table.
 
 #### Further
-Create albums that belong to a user and that contain many songs. Songs only have one album.
+
+* Add a types table and a pokemon-types table in your database, and create a seed.sql file inserting relevant data for these 2 tables. Note that a pokemon can have many types, and a type can have many pokemons.
 
 #### Further
-Artists have albums and songs.
+
+* When a user is logged in, the home page should show a separate table containing only pokemon associated with the user.
+
+## Useful SQL commands
+
+Note the proceeding commands should be run in a `psql` session on Terminal.
+
+View all the data in a table:
+```sql
+SELECT * FROM pokemon;
+```
+
+Delete your database and start again if you made a mistake:
+```sql
+DROP DATABASE pokemons;
+```
+
+Or if you just need to reset the table:
+```sql
+DROP TABLE pokemons;
+```
