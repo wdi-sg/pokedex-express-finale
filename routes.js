@@ -10,7 +10,11 @@
 
 module.exports = (app, db) => {
 
-  const users = require('./controllers/users.js')(db);
+  const users = require('./controllers/user.js')(db);
+  const pokemons = require('./controllers/pokemon')(db);
 
-  app.get('/users', users.get );
+  // users
+  app.get('/users/new', users.newUser);
+  app.post('/users/new', users.create);
+
 };
