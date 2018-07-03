@@ -88,9 +88,7 @@ module.exports = (db) => {
 		newValue.height += ' m';
 		newValue.weight += ' kg';
 
-		// console.log(newValue);
-
-		db.pokemon.edit(pokemonId, newValue, (error, queryResult) => {
+		db.pokemon.pokemonEdit(pokemonId, newValue, (error, queryResult) => {
 
 			if (error) {
 	 			console.error('err 2 error getting pokemon: ', error.message);

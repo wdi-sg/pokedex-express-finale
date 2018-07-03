@@ -60,19 +60,22 @@ module.exports = (dbPoolInstance) => {
 		},
 
 		// Edit pokemon 
-		edit: (pokemonId, newValue, callback) => {
+		pokemonEdit: (pokemonId, newValue, callback) => {
 
-			const queryString = 'UPDATE pokemons SET (id = $2, num = $3, name = $4, img = $5, weight = $6, height = $7) WHERE id = $1' ;
+			// const queryString = 'UPDATE pokemons SET (id = $2, num = $3, name = $4, img = $5, weight = $6, height = $7) WHERE id = $1' ;
+
+
+			const queryString = 'UPDATE pokemons SET id = $2, num = $3, name = $4, img = $5, weight = $6, height = $7 WHERE id = $1';
 
 			let values = [pokemonId, newValue.id, newValue.num, newValue.name, newValue.img, newValue.weight, newValue.height];
 
 			console.log(values);
 
-			dbPoolInstance.query(queryString, values, (error, queryResult) => {
+			dbPoolInstance.query(queryString, values, callback) //=> {
 				// invoke callback function with results after query has excuted
-				callback(error, queryResult);
+				// callback(error, queryResult);
 
-			});
+			// });
 
 		},
 
