@@ -1,41 +1,14 @@
-/**
- * User controller functions.
- *
- * Each user-related route in `routes.js` will call
- * one controller function here.
- *
- * Export all functions as a module using `module.exports`,
- * to be imported (using `require(...)`) in `routes.js`.
- */
-
-/**
- * ===========================================
- * Controller logic
- * ===========================================
- */
-
-
-/**
- * ===========================================
- * Export controller functions as a module
- * ===========================================
- */
-
 const sha256 = require('js-sha256');
+const db = require('../db.js')
 
 module.exports = function(db){
 
-    /**
-     * ===========================================
-     * Controller logic
-     * ===========================================
-     */
-
     const newUser = (req, res) => {
-        let password = sha256(req.body.password);
-        let queryText = 'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *';
-        const values = [req.body.email, password];
-        pool.query(queryText, values, (err, result) => {
+
+        let newUser = req.body;
+        newUser.password = sha256(newUser.password);
+
+        db.user.userModel(newUser.email, newUser.password, (err, result) => {
             if (err) {
                 res.send('db error: ' + err.message)
             } else {
@@ -57,15 +30,14 @@ module.exports = function(db){
     }
 
     const loginCheck = (req, res) => {
-        let queryText = 'SELECT password, id FROM users WHERE email = $1';
-        const enterPassHash = sha256(req.body.password);
-        const values = [req.body.email];
-        pool.query(queryText, values, (err, queryResult) => {
+
+        let userCheck = req.body
+        userCheck.password = sha256(userCheck.password);
+
+        db.user.loginCheck(userCheck.email, (err, queryResult) => {
             if (err) {
                 res.send('deb error: ' + err.message);
             } else {
-                // console.log('this is the row', queryResult.rows[0])
-                // console.log('this is the length', queryResult.rows.length)
                 if (queryResult.rows.length > 0) {
                     if (enterPassHash === queryResult.rows[0].password) {
                         let user_id = queryResult.rows[0].id;
@@ -79,11 +51,10 @@ module.exports = function(db){
             }
         })
     }
-
-    const addPokemon2User = (req, res) => {
-        let queryText = 'INSERT INTO pokemon_user (pokemon_id, user_id) VALUES ($1, $2) RETURNING *'
-        const values = [req.params.id, req.cookies['user_id']]
-        pool.query(queryText, values, (err, queryResult) => {
+     const addPokemon2User = (req, res) => {
+        let pokemon_id = req.params.id;
+        let user_id = req.cookies['user_id'];
+        db.user.addPokemon2User(pokemon_id, user_id, (err, queryResult) => {
             if (err) {
                 res.send('deb error: ' + err.message);
             } else {
@@ -95,8 +66,7 @@ module.exports = function(db){
 
     const displayUserPokemon = (req, res) => {
         let user_id = req.cookies['user_id'];
-        let queryText = 'SELECT * FROM pokemon_user JOIN pokemon ON pokemon.id = pokemon_user.pokemon_id WHERE user_id=' + user_id
-        pool.query(queryText, (err, queryResult) => {
+        db.user.displayUserPokemon.(user_id, (err, queryResult) => {
             if (err) {
                 res.send('deb error: ' + err.message);
             } else {
@@ -106,13 +76,11 @@ module.exports = function(db){
             }
         })
     }
-
     return {
-        newUser: newUser,
+        newUser : newUser,
         loginPage: loginPage,
         signUp: signUp,
-        loginCheck: loginCheck,
-        addPokemon2User: addPokemon2User,
-        displayUserPokemon: displayUserPokemon
-    };
+        loginCheck : loginCheck,
+        addPokemon2User : addPokemon2User,
+        displayUserPokemon : displayUserPokemon
 }

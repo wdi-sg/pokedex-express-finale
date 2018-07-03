@@ -18,16 +18,15 @@ const config = {
 
 const poolObj = new pg.Pool(config);
 
-poolI=poolObj.on('error', function (err) {
+poolObj.on('error', function (err) {
   console.log('Idle client error', err.message, err.stack);
 });
 
-const userModel = require('./models/user.js');
+const userModel = require('./models/user.js')(poolObj);
 
-const userObj = userModel(poolObj);
+const pokemonModel = require('./models/pokemon.js')(poolObj);
 
 module.exports = {
-    user: userObj,
-
-    pool : poolObj
+    user : userModel,
+    pokemon : pokemonModel
 };

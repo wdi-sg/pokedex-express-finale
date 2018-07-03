@@ -10,31 +10,36 @@
 
 module.exports = (app, db) => {
 
-  const users = require('./controllers/users.js')(db);
+  	const users = require('./controllers/user.js')(db);
+  	const pokemon = require('./controllers/pokemon.js')(db);
 
-  app.get('/users', users.get );
-  app.get('/pokemon', getRoot);
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~Pokemon~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-	app.get('/pokemon/:id/edit', editPokemonForm);
-	app.get('/pokemon/new', getNew);
-	app.get('/pokemon/:id', getPokemon);
-	app.get('/pokemon/:id/delete', deletePokemonForm);
+	app.get('/pokemon/:id/edit', pokemon.editPokemonForm);
+	app.get('/pokemon/new', pokemon.getNew);
+	app.get('/pokemon/:id', pokemon.getPokemon);
+	app.get('/pokemon/:id/delete', pokemon.deletePokemonForm);
 
-	app.post('/pokemon', postPokemon);
+	app.post('/pokemon', pokemon.postPokemon);
 
-	app.put('/pokemon/:id', updatePokemon);
+	app.put('/pokemon/:id', pokemon.updatePokemon);
 
-	app.delete('/pokemon/:id', deletePokemon);
+	app.delete('/pokemon/:id', pokemon.deletePokemon);
 
-	/* Creating user login and password */
-	app.get('/', loginPage);
-	app.get('/users/create', signUp);
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~User~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-	app.post('/users/new', newUser);
+	app.get('/', users.loginPage);
+	app.get('/users/create', users.signUp);
 
-	app.post('/users/exist', loginCheck);
+	app.post('/users/new', users.newUser);
+
+	app.post('/users/exist', users.loginCheck);
 
 	/*adding pokemon to specific user*/
-	app.get('/mypokelist', displayUserPokemon);
-	app.post('/pokemon/add/:id', addPokemon2User);
+	app.get('/mypokelist', users.displayUserPokemon);
+	app.post('/pokemon/add/:id', users.addPokemon2User);
 };

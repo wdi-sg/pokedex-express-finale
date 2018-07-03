@@ -16,18 +16,46 @@
  * Export model functions as a module
  * ===========================================
  */
+const db = require('../db.js');
 
-module.exports = function(db){
+module.exports = function(poolObj){
 
+    const userModel = (email, password, callback) => {
 
-    let example = function(email, password_hash, callback){
-        let queryText = 'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *';
+        let queryText = 'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *';
+        const values = [email, password];
 
-        const values = [email, password_hash];
-        db.query(queryText, values, callback);
-    };
+        poolObj.query(queryText, values, callback);
+    }
+
+    const loginCheck = (email, callback) => {
+
+        let queryText = 'SELECT password, id FROM users WHERE email = $1';
+        const values = [email];
+
+        poolObj.query(queryText, values, callback);
+
+    }
+     const addPokemon2User = (pokemon_id, pokemon_user) => {
+
+        let queryText = 'INSERT INTO pokemon_user (pokemon_id, user_id) VALUES ($1, $2) RETURNING *'
+        const values = [pokemon_id, usr_id];
+
+        poolObj.query(queryText, values, callback);
+
+    }
+
+    const displayUserPokemon = (callback) => {
+        
+        let queryText = 'SELECT * FROM pokemon_user JOIN pokemon ON pokemon.id = pokemon_user.pokemon_id WHERE user_id=' + user_id
+        poolObj.query(queryText, callback);
+
+    }
 
     return {
-        example : example
+        userModel : userModel,
+        loginCheck : loginCheck,
+        addPokemon2User : addPokemon2User,
+        displayUserPokemon : displayUserPokemon
     };
 };
