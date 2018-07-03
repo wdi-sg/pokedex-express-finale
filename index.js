@@ -4,6 +4,8 @@
  * Import external library modules as needed (eg. body-parser, etc).
  */
 
+const SALT = 'delon is awesome';
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -27,7 +29,9 @@ app.use(cookieParser());
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
-
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', reactEngine);
 
 
 
@@ -43,6 +47,20 @@ const reactEngine = require('express-react-views').createEngine();
 
 // Catch all unmatched requests and return 404 not found page
 require('./routes')(app, db);
+
+// const getRoot = (request, response) => {
+// 	db.pokemon.root(err, result) => { 
+// 	    if (err) {
+// 	      console.error('Query error:', err.stack);
+// 	    } 
+// 	    else {
+// 	      console.log('Query result:', result);
+// 	      response.render('/pokemon/Home', {pokemon: result.rows} );
+// 	    }
+// 	}
+// };
+
+
 
 /**
  * ===================================
