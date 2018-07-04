@@ -19,13 +19,13 @@
  * Export controller functions as a module
  * ===========================================
  */
-const get = (allModels) => {
+const get = (db) => {
     return (request, response) => {
         //use pokemon model method 'get' to retrive pokemon data
-        allModels.pokemon.get(request.params.id, (error, queryResult) => {
+        db.pokemon.get(request.params.id, (error, queryResult) => {
             //queryResult contains pokemon data returned from the pokemon model
             if (error) {
-                console.log('error getting pokemon: ', error);
+                console.log('error getting pokemon', error);
                 response.sendStatus(500);
             } else {
                 //render pokemon.handlebars in the pokemon view folder
@@ -35,9 +35,9 @@ const get = (allModels) => {
     };
 };
 
-const deletePokemon = (allModels) => {
+const deletePokemon = (db) => {
     return (request, response) => {
-        allModels.pokemon.deletePokemon(request.params.id, (error, queryResult) => {
+        db.pokemon.deletePokemon(request.params.id, (error, queryResult) => {
             if (error) {
                 response.sendStatus(500);
             } else {
@@ -47,11 +47,11 @@ const deletePokemon = (allModels) => {
     };
 };
 
-const updateForm = (allModels) => {
+const updateForm = (db) => {
     return (request, response) => {
-        allModels.pokemon.get(request.params.id, (error, queryResult) => {
+        db.pokemon.get(request.params.id, (error, queryResult) => {
             if (error) {
-                console.log('error getting pokemon: ', error);
+                console.log('error getting pokemon', error);
                 response.sendStatus(500);
             } else {
                 //render pokemon.handlerbars in pokemon view folder
@@ -62,10 +62,10 @@ const updateForm = (allModels) => {
     };
 };
 
-const update = (allModels) => {
+const update = (db) => {
     return (request, response) => {
 
-        allModels.pokemon.update(request.body, (error, queryResult) => {
+        db.pokemon.update(request.body, (error, queryResult) => {
             let pokemon_id = request.params.id;
 
             if (error) {
@@ -77,11 +77,11 @@ const update = (allModels) => {
     };
 };
 
-const createForm = (allModels) => {
+const createForm = (db) => {
     return (request, response) => {
-        console.log('return in createForm...');
-        allModels.pokemon.createForm(request.body, (error, queryResult) => {
-            console.log('in allModels.pokemon.createForm...');
+        console.log('create form');
+        db.pokemon.createForm(request.body, (error, queryResult) => {
+            console.log('pokemons girlssss');
 
             if (error) {
                 response.sendStatus(500);
@@ -93,14 +93,14 @@ const createForm = (allModels) => {
     };
 };
 
-const create = (allModels) => {
+const create = (db) => {
     return (request, response) => {
         //use pokemon model method 'create' to create new pokemon entry in database
-        allModels.pokemon.create(request.body, (error, queryResult) => {
+        db.pokemon.create(request.body, (error, queryResult) => {
 
             // check if able to get queryResult 
             if (error) {
-                console.log('error getting pokemon: ', error);
+                console.log('error getting pokemon ', error);
                 response.sendStatus(500);
             }
 

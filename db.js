@@ -13,7 +13,6 @@ const user = require('./models/user');
 
 const configs = {
     user: 'jemimalim',
-    // password: '13Dec1985',
     host: '127.0.0.1',
     database: 'pokemons_development',
     port: 5432

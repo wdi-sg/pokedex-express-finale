@@ -18,7 +18,7 @@ module.exports = (dbPool) => {
     return {
 
         createForm: (pokemon, callback) => {
-            console.log('in createForm in models');
+            console.log('create form in mod');
             const queryString = 'SELECT COUNT(id) FROM pokemons';
             dbPool.query(queryString, (error, queryResult) => {
                 console.log('running query in createForm models...');
@@ -37,9 +37,7 @@ module.exports = (dbPool) => {
                 pokemon.height
             ];
 
-            //execute query
             dbPool.query(queryString, VALUES, (error, queryResult) => {
-                //invoke callback function with results after query has executed
                 callback(error, queryResult);
             });
         },

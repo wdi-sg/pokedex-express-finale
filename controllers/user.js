@@ -23,10 +23,9 @@ const newForm = (request, response) => {
     response.render('user/new');
 };
 
-const create = (allModels) => {
+const create = (db) => {
     return (request, response) => {
-        //create new user entry in database
-        allModels.user.create(request.body, (error, queryResult) => {
+        db.user.create(request.body, (error, queryResult) => {
 
             if (error) {
                 console.error('error!!! ', error);
@@ -35,7 +34,6 @@ const create = (allModels) => {
             if (queryResult.rowCount >= 1) {
                 console.log('User created successfully');
 
-                // drop cookies to indicate user's logged in status and username
                 response.cookie('loggedIn', true);
                 response.cookie('username', request.body.name);
             } else {
@@ -57,9 +55,9 @@ const loginForm = (request, response) => {
     }
 };
 
-const login = (allModels) => {
+const login = (db) => {
     return (request, response) => {
-        allModels.user.login(request.body, (error, queryResult) => {
+        db.user.login(request.body, (error, queryResult) => {
             if (queryResult) {
                 let userName = queryResult.rows[0].name;
                 // let hashed = sha256(user.password);

@@ -16,11 +16,8 @@ module.exports = (app, allModels) => {
      *  Users
      *  =========================================
      */
-    // CRUD users
     app.get('/users/new', users.newForm);
     app.post('/users', users.create(allModels));
-
-    // Authentication
     app.delete('/users/logout', users.logout);
     app.get('/users/login', users.loginForm);
     app.post('/users/login', users.login(allModels));
@@ -30,7 +27,6 @@ module.exports = (app, allModels) => {
      *  Pokemons
      *  =========================================
      */
-    // CRUD pokemons
     app.get('/pokemons/:id/edit', pokemons.updateForm(allModels));
     app.put('/pokemons/:id', pokemons.update(allModels));
     app.get('/pokemons/new', pokemons.createForm(allModels));
