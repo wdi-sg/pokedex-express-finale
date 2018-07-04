@@ -22,6 +22,8 @@
 
 module.exports = function(db){
 
+  const SALT = 'delon is awesome';
+  const sha256 = require('js-sha256');
   /**
    * ===========================================
    * Controller logic
@@ -84,12 +86,13 @@ module.exports = function(db){
     let body = request.body;
 
     db.user.verify(body, (err, result) => {
-   
+      let queryRows;
+
       if(err) {
         response.send('db query error: ' + err.message); // error check for query from db
       }
       else {
-        const queryRows = result.rows;
+        queryRows = result.rows;
         console.log(queryRows);
       }
 
@@ -103,7 +106,7 @@ module.exports = function(db){
 
         if(db_password === request_password) {
 
-          let currentSessionCookie = sha256(query.Rows[0].id + 'logged_in' + SALT);
+          let currentSessionCookie = sha256(queryRows[0].id + 'logged_in' + SALT);
 
           // Tag cookie to logged in user
           response.cookie('logged_in', currentSessionCookie);  

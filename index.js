@@ -4,8 +4,8 @@
  * Import external library modules as needed (eg. body-parser, etc).
  */
 
-const SALT = 'delon is awesome';
-
+// const SALT = 'delon is awesome';
+// const sha256 = require('js-sha256');
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
