@@ -32,7 +32,14 @@ module.exports = function(db){
     response.send("WEIRD");
   };
 
+  const newForm = (request, response) => {
+    response.send('screw you!')
+  }
+
   return {
-    get: get
+    
+    getKey: get,
+    newForm: newForm
+
   };
 }

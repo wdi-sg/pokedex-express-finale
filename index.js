@@ -27,6 +27,9 @@ app.use(cookieParser());
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', reactEngine);
 
 
 
@@ -43,6 +46,8 @@ const reactEngine = require('express-react-views').createEngine();
 
 // Catch all unmatched requests and return 404 not found page
 require('./routes')(app, db);
+
+// module.exports = app;
 
 /**
  * ===================================

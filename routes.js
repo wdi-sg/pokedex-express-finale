@@ -10,7 +10,8 @@
 
 module.exports = (app, db) => {
 
-  const users = require('./controllers/users.js')(db);
+  	const users = require('./controllers/user.js')(db);
 
-  app.get('/users', users.get );
+  	app.get('/users', users.getKey );
+	// app.get('/users/new', users.newForm);
 };
