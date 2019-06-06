@@ -17,17 +17,29 @@
  * ===========================================
  */
 
-module.exports = function(db){
+module.exports = (pool) => {
 
+	return {
+     
+    	get: (userId, callback) => {
+    		const queryString = 'SELECT * FROM pokemon WHERE user_id = $1;';
+  			const values = [userId];
 
-    let example = function(email, password_hash, callback){
-        let queryText = 'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *';
+   			pool.query(queryString, values, callback)
+    	},
 
-        const values = [email, password_hash];
-        db.query(queryText, values, callback);
-    };
+    	create: (body, password_hash, callback) => {
+    		let queryString = 'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *;';
+    		const values = [body.email, password_hash];
 
-    return {
-        example : example
+  			pool.query(queryString, values, callback) 
+    	},
+
+    	verify: (body, callback) => {
+    		let queryString = 'SELECT * FROM users WHERE email = $1;';
+  			const values = [body.email];
+
+  			pool.query(queryString, values, callback) 
+      }
     };
 };
